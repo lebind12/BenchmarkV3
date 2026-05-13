@@ -1,0 +1,2 @@
+{"ts":"2026-05-13T22:55:00+09:00","from":"FE_REQUESTED","to":"SPEC_DRAFTING","by":"be-test","note":"team-lead 가 W1 (translation-filler 워커) task 부여. docs/workers/translation-filler.md SSOT mirror"}
+{"ts":"2026-05-13T23:15:00+09:00","from":"SPEC_DRAFTING","to":"SPEC_REVIEW","by":"be-test","note":"spec + testplan + unit/integration test 4파일 작성 완료. Red 확인 (14 unit errors, ModuleNotFoundError: app.workers). be-reviewer 핸드오프"}

@@ -1,0 +1,41 @@
+{
+  "endpoint_id": "phase-5-translation-filler",
+  "endpoint": {
+    "method": "N/A",
+    "path": "N/A (background worker)",
+    "fe_mockup_ref": null
+  },
+  "state": "SPEC_REVIEW",
+  "owner": "be-reviewer",
+  "iteration": {
+    "test_loop": 0,
+    "review_loop": 0
+  },
+  "artifacts": {
+    "spec_path": "docs/spec/endpoints/phase-5-translation-filler.md",
+    "test_plan_path": "docs/spec/endpoints/phase-5-translation-filler.testplan.md",
+    "test_code_path": "tests/unit/test_translation_filler.py",
+    "integration_test_code_path": "tests/integration/test_translation_filler.py",
+    "impl_branch": "w1-translation-filler",
+    "impl_commit": null,
+    "migrations": []
+  },
+  "evidence": {
+    "unit_test_log": ".claude/state/endpoint-flow/phase-5-translation-filler/unit.log",
+    "integration_test_log": null,
+    "test_verdict": "RED_EXPECTED",
+    "coverage_pct": null,
+    "notes": "Red 확인: 14 unit errors (ModuleNotFoundError: app.workers). 통합도 같은 import 단계에서 fail 예상. dev 가 app/workers/translation_filler/ 모듈 작성 후 통과해야 함. 인터페이스 가정: queue.fetch_queue / prompt.build_prompt / openai_client.{call, parse_response} / runner.run_cycle / scheduler.register-or-add_jobs."
+  },
+  "gates": {
+    "spec_approved_by": null,
+    "test_passed_at": null,
+    "review_approved_by": null,
+    "merge_approved_by": null
+  },
+  "blockers": [],
+  "next_action": {
+    "agent": "be-reviewer",
+    "command": "review W1 spec/testplan/test code vs docs/workers/translation-filler.md SSOT"
+  }
+}
