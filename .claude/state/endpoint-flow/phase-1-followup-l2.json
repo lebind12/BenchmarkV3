@@ -5,10 +5,10 @@
     "path": "N/A (additive DB migration — 3 tables)",
     "fe_mockup_ref": null
   },
-  "state": "IMPL_PUSHED",
-  "owner": "be-test",
+  "state": "REVIEW_PENDING",
+  "owner": "be-reviewer",
   "iteration": {
-    "test_loop": 0,
+    "test_loop": 1,
     "review_loop": 0
   },
   "artifacts": {
@@ -24,18 +24,20 @@
     "unit_test_log": ".claude/state/endpoint-flow/phase-1-followup-l2/unit.log",
     "integration_test_log": ".claude/state/endpoint-flow/phase-1-followup-l2/integration.log",
     "test_verdict": "ALL_PASS",
+    "unit_summary": "11 passed in 0.35s",
+    "integration_summary": "16 passed in 95.01s (1:35)",
     "coverage_pct": null,
-    "notes": "Unit 11/11 PASS (L2U-01..11). Integration 16/16 PASS (L2I-01..16) against TEST_DATABASE_URL Supabase incl reversibility base->head. Prod DB advanced to 0003_transfer_injury_news."
+    "notes": "be-test 정식 TESTING 재실행 완료. Unit 11/11 PASS + Integration 16/16 PASS against impl 586e1a4 via Supabase pooler. L2I-15 downgrade -1 + L2I-16 reversibility base→head 모두 정상. Prod DB at 0003_transfer_injury_news (be-dev 적용 보고)."
   },
   "gates": {
     "spec_approved_by": "be-reviewer",
-    "test_passed_at": "2026-05-14T00:55:00+09:00",
+    "test_passed_at": "2026-05-14T10:15:00+09:00",
     "review_approved_by": null,
     "merge_approved_by": null
   },
   "blockers": [],
   "next_action": {
     "agent": "be-reviewer",
-    "command": "review impl_commit 586e1a4 against db-schema.md §3.14-3.16 + phase-1-followup-l2.md"
+    "command": "code review impl_commit 586e1a4 against db-schema.md §3.14-3.16 + phase-1-followup-l2.md (모델 컬럼/타입/제약/마이그레이션 정본 일치 확인)"
   }
 }

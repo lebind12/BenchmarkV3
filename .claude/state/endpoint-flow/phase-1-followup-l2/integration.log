@@ -1,2 +1,27 @@
-................                                                         [100%]
-16 passed in 93.49s (0:01:33)
+============================= test session starts ==============================
+platform darwin -- Python 3.14.4, pytest-9.0.3, pluggy-1.6.0 -- /Users/woolee/benchmark/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/woolee/benchmark.l2-three-tables
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, anyio-4.13.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 16 items
+
+tests/integration/test_l2_migration.py::test_l2i01_16_tables_present PASSED [  6%]
+tests/integration/test_l2_migration.py::test_l2i02_new_indexes_exist PASSED [ 12%]
+tests/integration/test_l2_migration.py::test_l2i03_transfer_insert_with_fk PASSED [ 18%]
+tests/integration/test_l2_migration.py::test_l2i04_transfer_null_from_team_allowed PASSED [ 25%]
+tests/integration/test_l2_migration.py::test_l2i05_transfer_uniq_blocks_exact_duplicate PASSED [ 31%]
+tests/integration/test_l2_migration.py::test_l2i06_transfer_cascade_on_player_delete PASSED [ 37%]
+tests/integration/test_l2_migration.py::test_l2i07_transfer_set_null_on_team_delete PASSED [ 43%]
+tests/integration/test_l2_migration.py::test_l2i08_injury_uniq_blocks_dup PASSED [ 50%]
+tests/integration/test_l2_migration.py::test_l2i09_injury_fixture_id_null_allowed PASSED [ 56%]
+tests/integration/test_l2_migration.py::test_l2i10_injury_fixture_idx_is_partial PASSED [ 62%]
+tests/integration/test_l2_migration.py::test_l2i11_injury_on_delete PASSED [ 68%]
+tests/integration/test_l2_migration.py::test_l2i12_news_article_source_url_unique PASSED [ 75%]
+tests/integration/test_l2_migration.py::test_l2i13_news_article_tags_jsonb_containment PASSED [ 81%]
+tests/integration/test_l2_migration.py::test_l2i14_news_article_pending_idx_is_partial PASSED [ 87%]
+tests/integration/test_l2_migration.py::test_l2i15_downgrade_drops_three_tables_keeps_others PASSED [ 93%]
+tests/integration/test_l2_migration.py::test_l2i16_reversibility_base_to_head PASSED [100%]
+
+======================== 16 passed in 95.01s (0:01:35) =========================
