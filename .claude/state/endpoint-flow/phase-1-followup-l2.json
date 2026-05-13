@@ -1,0 +1,41 @@
+{
+  "endpoint_id": "phase-1-followup-l2-news-transfer-injury",
+  "endpoint": {
+    "method": "N/A",
+    "path": "N/A (additive DB migration — 3 tables)",
+    "fe_mockup_ref": null
+  },
+  "state": "IMPL_PUSHED",
+  "owner": "be-test",
+  "iteration": {
+    "test_loop": 0,
+    "review_loop": 0
+  },
+  "artifacts": {
+    "spec_path": "docs/spec/endpoints/phase-1-followup-l2.md",
+    "test_plan_path": "docs/spec/endpoints/phase-1-followup-l2.testplan.md",
+    "test_code_path": "tests/unit/test_l2_models.py",
+    "integration_test_code_path": "tests/integration/test_l2_migration.py",
+    "impl_branch": "l2-three-tables",
+    "impl_commit": "586e1a4",
+    "migrations": ["alembic/versions/0003_transfer_injury_news.py"]
+  },
+  "evidence": {
+    "unit_test_log": ".claude/state/endpoint-flow/phase-1-followup-l2/unit.log",
+    "integration_test_log": ".claude/state/endpoint-flow/phase-1-followup-l2/integration.log",
+    "test_verdict": "ALL_PASS",
+    "coverage_pct": null,
+    "notes": "Unit 11/11 PASS (L2U-01..11). Integration 16/16 PASS (L2I-01..16) against TEST_DATABASE_URL Supabase incl reversibility base->head. Prod DB advanced to 0003_transfer_injury_news."
+  },
+  "gates": {
+    "spec_approved_by": "be-reviewer",
+    "test_passed_at": "2026-05-14T00:55:00+09:00",
+    "review_approved_by": null,
+    "merge_approved_by": null
+  },
+  "blockers": [],
+  "next_action": {
+    "agent": "be-reviewer",
+    "command": "review impl_commit 586e1a4 against db-schema.md §3.14-3.16 + phase-1-followup-l2.md"
+  }
+}

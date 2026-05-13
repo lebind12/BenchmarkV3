@@ -1,0 +1,79 @@
+{
+  "endpoint_id": "phase-1-followup-l2-news-transfer-injury",
+  "reviewer": "be-reviewer",
+  "latest_stage": "SPEC_REVIEW",
+  "stages": [
+    {
+      "stage": "SPEC_REVIEW",
+      "reviewed_commit": "3832134",
+      "branch": "l2-three-tables",
+      "verdict": "APPROVE",
+      "next_state": "SPEC_APPROVED",
+      "files_reviewed": [
+        "docs/spec/db-schema.md §3.14/§3.15/§3.16 (SSOT, from main)",
+        "docs/spec/endpoints/phase-1-followup-l2.md",
+        "docs/spec/endpoints/phase-1-followup-l2.testplan.md",
+        "tests/unit/test_l2_models.py",
+        "tests/integration/test_l2_migration.py"
+      ],
+      "summary": "Spec mirror 가 SSOT §3.14 (transfer) / §3.15 (injury) / §3.16 (news_article) 의 DDL 과 컬럼/타입/NULL/DEFAULT/FK action/제약/인덱스 1:1 일치. 마이그레이션 메타데이터(revision='0003_transfer_injury_news', down_revision='0002_league_is_active')와 기존 0001/0002 불변 원칙 §0 명시. NULL FK 처리(transfer_uniq 4-tuple 에서 NULL distinct 동작, injury_uniq 에서 fixture_id NULL 시 중복 허용)도 spec §3.1/§3.2 에 정본 그대로 유지로 명시. Testplan L2U-01~11 + L2I-01~16 (총 27 케이스)이 (1) 13→16 테이블 확장, (2) 3 테이블 컬럼/타입/NULL/server_default 전 검증, (3) UNIQUE 3건(transfer_uniq, injury_uniq, source_url), (4) 인덱스 11건(transfer 4 + injury 3 + news_article 3), (5) partial index 2건(injury_fixture_idx WHERE fixture_id IS NOT NULL / news_article_pending_idx WHERE title_ko IS NULL), (6) GIN index 1건(news_article_tags_gin USING gin) + tags @> JSONB containment 동작, (7) ON DELETE 7 시나리오(transfer player CASCADE / from_team SET NULL / injury player CASCADE / fixture SET NULL / team CASCADE / league CASCADE), (8) downgrade -1 (3 테이블 drop + 13 유지 + league.is_active 보존), (9) reversibility base↔head 모두 커버. conftest 의 isolated_db 재사용으로 prod schema 미접근.",
+      "critical": [],
+      "major": [],
+      "minor": [
+        {
+          "id": "M-01",
+          "area": "tests/unit + integration",
+          "note": "`transfer_uniq` 의 NULL distinct 동작(동일 player+date+NULL+NULL row 중복 INSERT 허용 — PG 기본)이 spec §3.1 에 운영상 주의로만 명시되고 testplan 에 직접 검증 케이스 없음. 향후 운영에서 dedupe 로직 추가 시 회귀 추적 위해 명시 케이스(예: '같은 4-tuple 중 NULL 포함 row 가 두 번 INSERT 성공함을 확인하는 케이스') 추가 권장."
+        },
+        {
+          "id": "M-02",
+          "area": "tests/unit + integration",
+          "note": "`injury_uniq` 의 fixture_id=NULL 시 중복 허용(L2I-09 가 NULL INSERT 성공만 검증)도 같은 맥락. 명시 케이스 추가 권장."
+        },
+        {
+          "id": "M-03",
+          "area": "tests/unit",
+          "note": "`transfer_date_idx (transfer_date DESC)` 와 `news_article_published_idx (published_at DESC)` 의 DESC 방향이 L2U-05/L2U-10 에서 이름 존재만 확인되고 방향(DESC)은 검증되지 않음. SQLAlchemy 메타데이터 레벨에서 DESC 표현은 운영 phase-1 의 player_season_stat_topscorer_idx 와 동일 한계 — 통합 indexdef 텍스트 매칭으로 보강 가능."
+        },
+        {
+          "id": "M-04",
+          "area": "tests/integration",
+          "note": "0003 → 0002 → 0001 의존성 체인이 L2I-15 의 league.is_active 컬럼 잔존 확인으로 우회 검증되지만, `alembic current` 출력에 '0002_league_is_active' 가 들어있는지 직접 케이스가 없음. 운영 회귀 추적에 도움."
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "R-01",
+          "area": "spec",
+          "note": "spec §3.1 의 'NULL FK 중복 허용은 정본 그대로 (post-MVP 정책 결정)' 노트를 본문 §3.14 의 운영 가이드 1단락으로도 명시 권장. dev 가 dedupe 책임 부재를 인식하기 쉬워짐."
+        },
+        {
+          "id": "R-02",
+          "area": "spec",
+          "note": "news_article §3.3 의 tags 형식 `{teams: [external_id, ...], players: [external_id, ...]}` 가 정본 §3.16 의 참고 박스에서만 명시됨. testplan L2I-13 의 JSON 형식과 동기화되어 좋으나, dev 구현 시 schema 검증 함수가 필요할지(post-MVP) 메모 권장."
+        },
+        {
+          "id": "R-03",
+          "area": "tests/integration",
+          "note": "L2I-13 의 tags @> containment 가 GIN 인덱스 효과를 검증하지는 않는다(planner 의존). 인덱스 존재(L2I-02) + 동작(containment 쿼리 결과)만으로 충분 — 명시적 EXPLAIN 케이스 추가는 과잉. 현재 검증 적절."
+        }
+      ],
+      "checklist_outcome": {
+        "spec_matches_ssot_3_14_transfer": "PASS (컬럼/타입/UNIQUE 4-tuple/4 인덱스/FK CASCADE+SET NULL)",
+        "spec_matches_ssot_3_15_injury": "PASS (컬럼/UNIQUE 4-tuple/partial index/4 FK)",
+        "spec_matches_ssot_3_16_news_article": "PASS (컬럼/source_url UNIQUE/partial title_ko IS NULL/GIN tags)",
+        "down_revision_chain": "PASS (0003 → 0002_league_is_active 명시)",
+        "existing_migrations_immutable": "PASS (spec §0 불변 원칙)",
+        "transfer_unique_4tuple_with_null_fk": "PASS (NULL FK 명시, spec §3.1)",
+        "injury_unique_with_null_fixture_id": "PASS (spec §3.2 명시)",
+        "news_article_source_url_unique": "PASS (L2U-09, L2I-12)",
+        "jsonb_tags_with_gin": "PASS (L2U-10, L2I-13)",
+        "partial_index_title_ko_is_null": "PASS (L2U-10, L2I-14)",
+        "partial_index_fixture_id_is_not_null": "PASS (L2U-08, L2I-10)",
+        "fk_cascade_set_null_scenarios": "PASS (L2I-06/07/11)",
+        "downgrade_reversibility": "PASS (L2I-15 -1, L2I-16 base↔head)",
+        "isolated_schema_fixture": "PASS (isolated_db 재사용)"
+      }
+    }
+  ]
+}
