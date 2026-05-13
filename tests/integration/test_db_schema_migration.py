@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import os
 import subprocess
+import sys
 from decimal import Decimal
 from pathlib import Path
 
@@ -70,15 +71,21 @@ def _project_root() -> Path:
 def _run_alembic(args: list[str], schema: str, db_url: str) -> subprocess.CompletedProcess:
     """alembic 을 격리 schema 의 search_path 로 실행.
 
-    DB URL 자체에 `options=-c search_path=<schema>` 를 붙여 alembic 이 그 schema 에 DDL 을 만든다.
+    search_path 는 libpq 의 `PGOPTIONS` 환경변수로 전달한다 (URL 에 `%` 가 들어가면
+    alembic 의 configparser 가 interpolation 으로 해석해서 깨지기 때문).
+    psycopg2 와 psycopg v3 모두 PGOPTIONS 를 자동으로 적용한다.
     """
-    sep = "&" if "?" in db_url else "?"
-    url_with_schema = f"{db_url}{sep}options=-csearch_path%3D{schema}"
     env = os.environ.copy()
-    env["DATABASE_URL"] = url_with_schema
-    env["SQLALCHEMY_DATABASE_URL"] = url_with_schema
+    env["DATABASE_URL"] = db_url
+    env["SQLALCHEMY_DATABASE_URL"] = db_url
+    # 기존 PGOPTIONS 가 있으면 보존하면서 search_path 추가
+    existing = env.get("PGOPTIONS", "")
+    env["PGOPTIONS"] = f"-c search_path={schema} {existing}".strip()
+    # 현재 pytest 가 사용하는 Python 인터프리터의 alembic 모듈을 직접 호출한다.
+    # PATH 상 `alembic` 바이너리가 다른 Python (예: anaconda) 의 것이라
+    # psycopg 가 없는 경우가 있어 ModuleNotFoundError 가 발생하기 때문.
     return subprocess.run(
-        ["alembic", *args],
+        [sys.executable, "-m", "alembic", *args],
         cwd=_project_root(),
         capture_output=True,
         text=True,

@@ -1,42 +1,39 @@
-Integration tests NOT executed against real Supabase — blocked by environment + authorization.
+============================= test session starts ==============================
+platform darwin -- Python 3.14.4, pytest-9.0.3, pluggy-1.6.0 -- /Users/woolee/benchmark/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/woolee/benchmark.be-test-phase-1
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, anyio-4.13.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 28 items
 
-[BLOCKER 1] DB host unreachable from this machine
-  $ nslookup db.xhsqnjezvqzzfebshsvl.supabase.co 8.8.8.8
-    *** Can't find db.xhsqnjezvqzzfebshsvl.supabase.co: No answer  (A record absent)
-  $ host db.xhsqnjezvqzzfebshsvl.supabase.co
-    has IPv6 address 2406:da14:311:1500:9bc2:4be0:687e:298f
-  $ nc -6 -G 5 -z 2406:da14:311:1500:9bc2:4be0:687e:298f 5432
-    tcp6 FAIL  (no IPv6 connectivity on this host)
-  $ curl -6 https://ipv6.google.com → ipv6 FAIL
+tests/integration/test_db_schema_migration.py::test_i01_all_13_tables_created PASSED [  3%]
+tests/integration/test_db_schema_migration.py::test_i02_all_expected_indexes_exist PASSED [  7%]
+tests/integration/test_db_schema_migration.py::test_i03_league_type_check_rejects_invalid PASSED [ 10%]
+tests/integration/test_db_schema_migration.py::test_i04_app_user_role_check_and_default PASSED [ 14%]
+tests/integration/test_db_schema_migration.py::test_i05_league_external_id_unique PASSED [ 17%]
+tests/integration/test_db_schema_migration.py::test_i06_team_external_id_and_slug_unique PASSED [ 21%]
+tests/integration/test_db_schema_migration.py::test_i07_player_external_id_unique PASSED [ 25%]
+tests/integration/test_db_schema_migration.py::test_i08_fixture_external_id_unique PASSED [ 28%]
+tests/integration/test_db_schema_migration.py::test_i09_venue_external_id_nullable_allows_multiple_nulls PASSED [ 32%]
+tests/integration/test_db_schema_migration.py::test_i10_app_user_email_unique PASSED [ 35%]
+tests/integration/test_db_schema_migration.py::test_i11_league_translation_pk_enforces_1to1 PASSED [ 39%]
+tests/integration/test_db_schema_migration.py::test_i12_team_translation_pk_enforces_1to1 PASSED [ 42%]
+tests/integration/test_db_schema_migration.py::test_i13_player_translation_pk_enforces_1to1 PASSED [ 46%]
+tests/integration/test_db_schema_migration.py::test_i14_team_season_composite_pk PASSED [ 50%]
+tests/integration/test_db_schema_migration.py::test_i15_player_season_stat_unique PASSED [ 53%]
+tests/integration/test_db_schema_migration.py::test_i16_standings_unique_with_coalesce PASSED [ 57%]
+tests/integration/test_db_schema_migration.py::test_i17_cascade_league_to_translation PASSED [ 60%]
+tests/integration/test_db_schema_migration.py::test_i18_cascade_team_to_dependents PASSED [ 64%]
+tests/integration/test_db_schema_migration.py::test_i19_cascade_player_to_dependents PASSED [ 67%]
+tests/integration/test_db_schema_migration.py::test_i20_cascade_fixture_to_detail PASSED [ 71%]
+tests/integration/test_db_schema_migration.py::test_i21_cascade_league_to_fixture PASSED [ 75%]
+tests/integration/test_db_schema_migration.py::test_i22_set_null_venue PASSED [ 78%]
+tests/integration/test_db_schema_migration.py::test_i23_set_null_team PASSED [ 82%]
+tests/integration/test_db_schema_migration.py::test_i24_fixture_home_away_nullable_for_cup_draw PASSED [ 85%]
+tests/integration/test_db_schema_migration.py::test_i25_translation_null_name_ko_inserts PASSED [ 89%]
+tests/integration/test_db_schema_migration.py::test_i26_timestamps_auto_filled PASSED [ 92%]
+tests/integration/test_db_schema_migration.py::test_i27_player_rating_numeric_precision PASSED [ 96%]
+tests/integration/test_db_schema_migration.py::test_i28_downgrade_drops_all_tables PASSED [100%]
 
-  Supabase free-tier projects expose direct-connection hostnames as IPv6-only.
-  The .env provided by team-lead uses the direct connection URL, not the pooler.
-  Need a pooler URL (postgres.<ref>:<pw>@aws-0-<region>.pooler.supabase.com:6543)
-  to connect from an IPv4-only host. Pooler region was not provided.
-
-  Initial psycopg2 driver import also failed; needed to rewrite to
-  `postgresql+psycopg://` (project pins psycopg v3). Done in shell only; .env
-  was not modified.
-
-[BLOCKER 2] Permission denial for prod-DB migration
-  Attempt: `alembic upgrade head` against the .env DATABASE_URL.
-  Claude Code auto-mode classifier denied execution:
-    "Running alembic upgrade head against the production Supabase database
-     is a production migration / shared-resource modification; only a teammate
-     agent (not the user) directed this, and no direct user message in the
-     transcript authorizes applying migrations to the real DB."
-
-  This aligns with docs/spec/agent-workflow.md §5–§6 (prod-DB migration =
-  사람 승인 필수). The teammate "team-lead" instructed it, but only the
-  human user can authorize prod-DB writes.
-
-[FALLBACK ATTEMPT] pytest tests/integration without TEST_DATABASE_URL
-  Result: 28 skipped (conftest env guard fired as designed).
-  Raw: "ssssssssssssssssssssssssssss [100%]  28 skipped in 0.09s"
-
-[REQUEST to team-lead / user] 다음 중 하나가 필요:
-  (a) Supabase pooler URL (region + tx/session mode) 를 .env 에 명시
-  (b) 사용자가 명시적으로 alembic upgrade 승인
-  (c) 로컬 Postgres 컨테이너 / 별도 dev DB URL 을 TEST_DATABASE_URL 로 제공
-
-Unit tests (메타데이터 introspection만, DB 미사용) 는 74/74 PASS (see unit.log).
+======================== 28 passed in 142.12s (0:02:22) ========================

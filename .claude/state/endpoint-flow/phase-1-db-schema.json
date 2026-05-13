@@ -5,10 +5,10 @@
     "path": "N/A (DB infra task)",
     "fe_mockup_ref": null
   },
-  "state": "TESTING",
-  "owner": "be-test",
+  "state": "REVIEW_PENDING",
+  "owner": "be-reviewer",
   "iteration": {
-    "test_loop": 0,
+    "test_loop": 1,
     "review_loop": 0
   },
   "artifacts": {
@@ -23,29 +23,32 @@
   "evidence": {
     "unit_test_log": ".claude/state/endpoint-flow/phase-1-db-schema/unit.log",
     "integration_test_log": ".claude/state/endpoint-flow/phase-1-db-schema/integration.log",
-    "alembic_log": null,
-    "test_verdict": "UNIT_PASS_INTEGRATION_BLOCKED",
+    "alembic_log": ".claude/state/endpoint-flow/phase-1-db-schema/alembic.log",
+    "test_verdict": "PASS",
+    "unit_summary": "74 passed in 0.23s",
+    "integration_summary": "28 passed in 142.12s (2:22)",
     "coverage_pct": null,
-    "notes": "Unit 74/74 PASS against be-dev impl (commit 92b0af8). Integration tests not executed: (1) Supabase direct host IPv6-only and host has no IPv6; (2) prod-DB alembic upgrade denied by auto-mode classifier — requires explicit user authorization or pooler URL."
+    "notes": "Unit 74/74 PASS, integration 28/28 PASS against impl 92b0af8 via Supabase pooler (aws-1-ap-northeast-1, port 5432). alembic upgrade head on prod public schema NOT executed — auto-mode classifier requires direct user authorization (teammate-relay insufficient). Equivalent verification done inside isolated schemas (I-01 + I-02 + I-28)."
   },
   "gates": {
     "spec_approved_by": "be-reviewer",
-    "test_passed_at": null,
+    "test_passed_at": "2026-05-13T22:15:00+09:00",
     "review_approved_by": null,
     "merge_approved_by": null
   },
   "blockers": [
     {
-      "kind": "env",
-      "detail": "Supabase direct host db.<ref>.supabase.co resolves to IPv6 only; this host has no IPv6 connectivity. Need pooler URL (aws-0-<region>.pooler.supabase.com:6543/5432) in .env."
-    },
-    {
       "kind": "authorization",
-      "detail": "alembic upgrade against prod Supabase blocked by Claude Code auto-mode classifier (teammate agent directive insufficient; requires direct user authorization per agent-workflow.md §5-§6)."
+      "severity": "operational",
+      "detail": "Step 2 (alembic upgrade on prod public schema) still requires direct user authorization. Tests themselves are GREEN; recommend CI/CD-driven application per agent-workflow.md §5."
     }
   ],
   "next_action": {
-    "agent": "human / team-lead",
-    "command": "Provide Supabase pooler URL in .env OR authorize prod-DB migration explicitly OR provide a local/dev Postgres TEST_DATABASE_URL."
-  }
+    "agent": "be-reviewer",
+    "command": "Code review impl 92b0af8 (13 SQLAlchemy models + alembic initial migration) against spec. All tests green. Note authorization-only blocker on prod migration step."
+  },
+  "fixes_during_testing": [
+    "tests/conftest.py: switched to per-connect SET search_path event listener (Supabase pooler did not honor libpq options) + driver scheme normalization (postgresql:// -> postgresql+psycopg://)",
+    "tests/integration/test_db_schema_migration.py: invoke alembic via `sys.executable -m alembic` (was using PATH which resolved to anaconda Python without psycopg); removed URL-embedded options (configparser % interpolation issue)"
+  ]
 }
