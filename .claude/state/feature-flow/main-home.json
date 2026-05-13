@@ -1,0 +1,42 @@
+{
+  "feature_id": "main-home",
+  "feature": {
+    "title": "메인 페이지 (홈) — 3패널 dashboard",
+    "requirements_doc": "docs/features/main-home.md"
+  },
+  "phase": "mock",
+  "state": "PLAN_REVIEW",
+  "owner": "fe-reviewer",
+  "iteration": {
+    "plan_review_loop": 0,
+    "playwright_loop": 0,
+    "review_loop": 0,
+    "integration_loop": 0
+  },
+  "endpoint_requests": [
+    "GET__api_v1_home_news",
+    "GET__api_v1_home_hot_players",
+    "GET__api_v1_home_transfers",
+    "GET__api_v1_home_injuries",
+    "GET__api_v1_home_fixtures",
+    "GET__api_v1_home_standings",
+    "GET__api_v1_home_top_players"
+  ],
+  "be_dependency_state": {},
+  "artifacts": {
+    "spec_path": "docs/features/main-home.spec.md",
+    "devplan_path": "docs/features/main-home.devplan.md",
+    "testplan_path": "docs/features/main-home.testplan.md",
+    "branch": "fe-feat-main-home",
+    "commit": null,
+    "playwright_e2e_paths": []
+  },
+  "evidence": {},
+  "gates": {
+    "plan_approved_by": null,
+    "review_approved_by": null,
+    "merge_approved_by": null
+  },
+  "blockers": [],
+  "next_action": { "agent": "fe-reviewer", "command": "review plan artifacts for main-home" }
+}
