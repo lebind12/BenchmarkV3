@@ -1,0 +1,41 @@
+{
+  "endpoint_id": "phase-1-followup-l2-news-transfer-injury",
+  "endpoint": {
+    "method": "N/A",
+    "path": "N/A (additive DB migration — 3 tables)",
+    "fe_mockup_ref": null
+  },
+  "state": "SPEC_REVIEW",
+  "owner": "be-reviewer",
+  "iteration": {
+    "test_loop": 0,
+    "review_loop": 0
+  },
+  "artifacts": {
+    "spec_path": "docs/spec/endpoints/phase-1-followup-l2.md",
+    "test_plan_path": "docs/spec/endpoints/phase-1-followup-l2.testplan.md",
+    "test_code_path": "tests/unit/test_l2_models.py",
+    "integration_test_code_path": "tests/integration/test_l2_migration.py",
+    "impl_branch": "l2-three-tables",
+    "impl_commit": null,
+    "migrations": []
+  },
+  "evidence": {
+    "unit_test_log": ".claude/state/endpoint-flow/phase-1-followup-l2/unit.log",
+    "integration_test_log": null,
+    "test_verdict": "RED_EXPECTED",
+    "coverage_pct": null,
+    "notes": "Red 확인: 11 unit errors (ImportError: Transfer/Injury/NewsArticle). 통합은 0003 마이그레이션 미생성으로 16 테이블 set mismatch 예상. dev 가 모델 + 0003 마이그레이션 작성 후 통과. 정본 SSOT: db-schema.md §3.14/§3.15/§3.16."
+  },
+  "gates": {
+    "spec_approved_by": null,
+    "test_passed_at": null,
+    "review_approved_by": null,
+    "merge_approved_by": null
+  },
+  "blockers": [],
+  "next_action": {
+    "agent": "be-reviewer",
+    "command": "review L2 spec/testplan/test code vs db-schema.md §3.14/§3.15/§3.16"
+  }
+}

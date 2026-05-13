@@ -1,0 +1,2 @@
+{"ts":"2026-05-14T09:00:00+09:00","from":"FE_REQUESTED","to":"SPEC_DRAFTING","by":"be-test","note":"team-lead 가 L2 (transfer/injury/news_article 3 테이블) task 부여. db-schema.md §3.14/§3.15/§3.16 mirror"}
+{"ts":"2026-05-14T09:25:00+09:00","from":"SPEC_DRAFTING","to":"SPEC_REVIEW","by":"be-test","note":"spec + testplan + unit/integration test 4 파일 작성 완료. Red 확인 (11 unit errors, ImportError). be-reviewer 핸드오프"}
