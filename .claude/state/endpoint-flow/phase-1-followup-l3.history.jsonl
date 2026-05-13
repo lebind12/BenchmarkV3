@@ -1,0 +1,2 @@
+{"ts":"2026-05-14T09:40:00+09:00","from":"FE_REQUESTED","to":"SPEC_DRAFTING","by":"be-test","note":"team-lead 가 L3 (h2h_fixture) task 부여. db-schema.md §3.17 mirror. L2 머지 의존."}
+{"ts":"2026-05-14T09:55:00+09:00","from":"SPEC_DRAFTING","to":"SPEC_REVIEW","by":"be-test","note":"spec + testplan + unit/integration 4 파일 작성 완료. Red 확인 (5 unit ImportError). 함수 인덱스 LEAST/GREATEST + kickoff_at DESC 검증 포함. be-reviewer 핸드오프"}
