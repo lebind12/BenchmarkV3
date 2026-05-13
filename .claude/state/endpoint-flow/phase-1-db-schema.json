@@ -5,8 +5,8 @@
     "path": "N/A (DB infra task)",
     "fe_mockup_ref": null
   },
-  "state": "SPEC_REVIEW",
-  "owner": "be-reviewer",
+  "state": "IMPL_PUSHED",
+  "owner": "be-test",
   "iteration": {
     "test_loop": 0,
     "review_loop": 0
@@ -17,25 +17,25 @@
     "test_code_path": "tests/unit/test_db_models.py",
     "integration_test_code_path": "tests/integration/test_db_schema_migration.py",
     "impl_branch": "be-infra-phase-1-test",
-    "impl_commit": null,
-    "migrations": []
+    "impl_commit": "PENDING_COMMIT",
+    "migrations": ["alembic/versions/20260513_2100_0001_initial_schema.py"]
   },
   "evidence": {
     "unit_test_log": ".claude/state/endpoint-flow/phase-1-db-schema/unit.log",
-    "integration_test_log": null,
-    "test_verdict": "RED_EXPECTED",
+    "integration_test_log": ".claude/state/endpoint-flow/phase-1-db-schema/integration.log",
+    "test_verdict": "UNIT_PASS_INTEGRATION_SKIPPED",
     "coverage_pct": null,
-    "notes": "단위 테스트는 ImportError 로 expected fail (TDD Red). app/models/ 미작성 상태. dev 가 작업 후 통과해야 함."
+    "notes": "Unit tests 74/74 PASS. Integration tests 28 skipped — TEST_DATABASE_URL not set (conftest env guard, per spec)."
   },
   "gates": {
-    "spec_approved_by": null,
+    "spec_approved_by": "be-reviewer",
     "test_passed_at": null,
     "review_approved_by": null,
     "merge_approved_by": null
   },
   "blockers": [],
   "next_action": {
-    "agent": "be-reviewer",
-    "command": "review spec/testplan/test code at docs/spec/endpoints/phase-1-db-schema.md vs db-schema.md SSOT"
+    "agent": "be-test",
+    "command": "run pytest against be-infra-phase-1-test HEAD to validate impl; set TEST_DATABASE_URL to exercise integration tests"
   }
 }
