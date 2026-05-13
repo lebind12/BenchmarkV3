@@ -5,8 +5,8 @@
     "path": "N/A (additive DB migration — 1 table)",
     "fe_mockup_ref": null
   },
-  "state": "SPEC_APPROVED",
-  "owner": "be-dev",
+  "state": "IMPL_PUSHED",
+  "owner": "be-test",
   "iteration": {
     "test_loop": 0,
     "review_loop": 0
@@ -17,31 +17,25 @@
     "test_code_path": "tests/unit/test_l3_h2h_models.py",
     "integration_test_code_path": "tests/integration/test_l3_h2h_migration.py",
     "impl_branch": "l3-h2h",
-    "impl_commit": null,
-    "migrations": []
+    "impl_commit": "ce11513",
+    "migrations": ["alembic/versions/0004_h2h_fixture.py"]
   },
   "evidence": {
     "unit_test_log": ".claude/state/endpoint-flow/phase-1-followup-l3/unit.log",
-    "integration_test_log": null,
-    "test_verdict": "RED_EXPECTED",
+    "integration_test_log": ".claude/state/endpoint-flow/phase-1-followup-l3/integration.log",
+    "test_verdict": "ALL_PASS",
     "coverage_pct": null,
-    "notes": "Red 확인: 5 unit errors (ImportError H2HFixture). 통합은 L2 (0003) 미머지 + 0004 미생성으로 fail. dev 는 L2 머지 후 rebase 한 뒤 0004_h2h_fixture 작성 (down_revision='0003_transfer_injury_news'). 함수 인덱스 (LEAST/GREATEST/kickoff_at DESC) 은 raw SQL 또는 SQLAlchemy func.least/greatest 로 선언."
+    "notes": "Unit 5/5 PASS (L3U-01..05). Integration 9/9 PASS (L3I-01..09) against TEST_DATABASE_URL Supabase incl reversibility base->head and order-insensitive pair query L3I-07. Prod DB advanced to 0004_h2h_fixture. L2 merged into this branch via merge commit (L3 spec §1)."
   },
   "gates": {
     "spec_approved_by": "be-reviewer",
-    "test_passed_at": null,
+    "test_passed_at": "2026-05-14T01:30:00+09:00",
     "review_approved_by": null,
     "merge_approved_by": null
   },
-  "blockers": [
-    {
-      "kind": "dependency",
-      "severity": "info",
-      "detail": "L2 (0003_transfer_injury_news) 머지 전에는 통합 테스트가 alembic revision chain 결손으로 fail. be-dev 는 L2 머지 후 main 에서 rebase 한 뒤 작업."
-    }
-  ],
+  "blockers": [],
   "next_action": {
     "agent": "be-reviewer",
-    "command": "review L3 spec/testplan/test code vs db-schema.md §3.17"
+    "command": "review impl_commit ce11513 against db-schema.md §3.17 + phase-1-followup-l3.md"
   }
 }
