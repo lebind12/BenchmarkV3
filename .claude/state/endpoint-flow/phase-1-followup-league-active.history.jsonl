@@ -1,0 +1,2 @@
+{"ts":"2026-05-13T22:30:00+09:00","from":"FE_REQUESTED","to":"SPEC_DRAFTING","by":"be-test","note":"team-lead 가 L1 follow-up (league.is_active) task 부여. db-schema.md §3.1 갱신분 mirror"}
+{"ts":"2026-05-13T22:45:00+09:00","from":"SPEC_DRAFTING","to":"SPEC_REVIEW","by":"be-test","note":"spec + testplan + unit/integration test 4파일 작성 완료. Red 확인 (5 fail / 1 pass, 모델 is_active + 0002 마이그레이션 미작성). be-reviewer 핸드오프"}

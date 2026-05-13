@@ -1,0 +1,158 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.4, pytest-9.0.3, pluggy-1.6.0 -- /Users/woolee/benchmark/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/woolee/benchmark.l1-league-active
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, anyio-4.13.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 6 items
+
+tests/unit/test_league_is_active.py::test_lu01_is_active_column_exists FAILED [ 16%]
+tests/unit/test_league_is_active.py::test_lu02_is_active_is_boolean FAILED [ 33%]
+tests/unit/test_league_is_active.py::test_lu03_is_active_not_null FAILED [ 50%]
+tests/unit/test_league_is_active.py::test_lu04_is_active_server_default_true FAILED [ 66%]
+tests/unit/test_league_is_active.py::test_lu05_league_active_idx_declared_on_model FAILED [ 83%]
+tests/unit/test_league_is_active.py::test_lu06_table_count_unchanged PASSED [100%]
+
+=================================== FAILURES ===================================
+______________________ test_lu01_is_active_column_exists _______________________
+
+league_tbl = Table('league', MetaData(), Column('id', BigInteger(), table=<league>, primary_key=True, nullable=False, server_defaul...alse, server_default=DefaultClause(<sqlalchemy.sql.functions.now at 0x10a487790; now>, for_update=False)), schema=None)
+
+    def test_lu01_is_active_column_exists(league_tbl):
+>       assert "is_active" in league_tbl.columns, "league.is_active 컬럼 정의 필요"
+E       AssertionError: league.is_active 컬럼 정의 필요
+E       assert 'is_active' in <sqlalchemy.sql.base.ReadOnlyColumnCollection object at 0x10a5d8220>
+E        +  where <sqlalchemy.sql.base.ReadOnlyColumnCollection object at 0x10a5d8220> = Table('league', MetaData(), Column('id', BigInteger(), table=<league>, primary_key=True, nullable=False, server_default=Identity(always=True)), Column('external_id', Integer(), table=<league>, nullable=False), Column('name', Text(), table=<league>, nullable=False), Column('type', Text(), table=<league>, nullable=False), Column('logo_url', Text(), table=<league>), Column('country_name', Text(), table=<league>), Column('country_code', Text(), table=<league>), Column('country_flag', Text(), table=<league>), Column('slug', Text(), table=<league>, nullable=False), Column('current_season', Integer(), table=<league>), Column('created_at', DateTime(timezone=True), table=<league>, nullable=False, server_default=DefaultClause(<sqlalchemy.sql.functions.now at 0x10a56d490; now>, for_update=False)), Column('updated_at', DateTime(timezone=True), table=<league>, nullable=False, server_default=DefaultClause(<sqlalchemy.sql.functions.now at 0x10a487790; now>, for_update=False)), schema=None).columns
+
+tests/unit/test_league_is_active.py:53: AssertionError
+________________________ test_lu02_is_active_is_boolean ________________________
+
+league_tbl = Table('league', MetaData(), Column('id', BigInteger(), table=<league>, primary_key=True, nullable=False, server_defaul...alse, server_default=DefaultClause(<sqlalchemy.sql.functions.now at 0x10a487790; now>, for_update=False)), schema=None)
+
+    def test_lu02_is_active_is_boolean(league_tbl):
+        from sqlalchemy import Boolean
+    
+>       col = league_tbl.columns["is_active"]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_league_is_active.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <sqlalchemy.sql.base.ReadOnlyColumnCollection object at 0x10a5d8220>
+key = 'is_active'
+
+    def __getitem__(
+        self, key: Union[str, int, slice, Tuple[Union[str, int], ...]]
+    ) -> Union[ReadOnlyColumnCollection[_COLKEY, _COL_co], _COL_co]:
+        try:
+            if isinstance(key, (tuple, slice)):
+                if isinstance(key, slice):
+                    cols = (
+                        (sub_key, col)
+                        for (sub_key, col, _) in self._collection[key]
+                    )
+                else:
+                    cols = (self._index[sub_key] for sub_key in key)
+    
+                return ColumnCollection(cols).as_readonly()
+            else:
+>               return self._index[key][1]
+                       ^^^^^^^^^^^^^^^^
+E               KeyError: 'is_active'
+
+../benchmark/.venv/lib/python3.14/site-packages/sqlalchemy/sql/base.py:1716: KeyError
+_________________________ test_lu03_is_active_not_null _________________________
+
+league_tbl = Table('league', MetaData(), Column('id', BigInteger(), table=<league>, primary_key=True, nullable=False, server_defaul...alse, server_default=DefaultClause(<sqlalchemy.sql.functions.now at 0x10a487790; now>, for_update=False)), schema=None)
+
+    def test_lu03_is_active_not_null(league_tbl):
+>       assert league_tbl.columns["is_active"].nullable is False, "is_active NOT NULL 필요"
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_league_is_active.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <sqlalchemy.sql.base.ReadOnlyColumnCollection object at 0x10a5d8220>
+key = 'is_active'
+
+    def __getitem__(
+        self, key: Union[str, int, slice, Tuple[Union[str, int], ...]]
+    ) -> Union[ReadOnlyColumnCollection[_COLKEY, _COL_co], _COL_co]:
+        try:
+            if isinstance(key, (tuple, slice)):
+                if isinstance(key, slice):
+                    cols = (
+                        (sub_key, col)
+                        for (sub_key, col, _) in self._collection[key]
+                    )
+                else:
+                    cols = (self._index[sub_key] for sub_key in key)
+    
+                return ColumnCollection(cols).as_readonly()
+            else:
+>               return self._index[key][1]
+                       ^^^^^^^^^^^^^^^^
+E               KeyError: 'is_active'
+
+../benchmark/.venv/lib/python3.14/site-packages/sqlalchemy/sql/base.py:1716: KeyError
+___________________ test_lu04_is_active_server_default_true ____________________
+
+league_tbl = Table('league', MetaData(), Column('id', BigInteger(), table=<league>, primary_key=True, nullable=False, server_defaul...alse, server_default=DefaultClause(<sqlalchemy.sql.functions.now at 0x10a487790; now>, for_update=False)), schema=None)
+
+    def test_lu04_is_active_server_default_true(league_tbl):
+>       col = league_tbl.columns["is_active"]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/unit/test_league_is_active.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <sqlalchemy.sql.base.ReadOnlyColumnCollection object at 0x10a5d8220>
+key = 'is_active'
+
+    def __getitem__(
+        self, key: Union[str, int, slice, Tuple[Union[str, int], ...]]
+    ) -> Union[ReadOnlyColumnCollection[_COLKEY, _COL_co], _COL_co]:
+        try:
+            if isinstance(key, (tuple, slice)):
+                if isinstance(key, slice):
+                    cols = (
+                        (sub_key, col)
+                        for (sub_key, col, _) in self._collection[key]
+                    )
+                else:
+                    cols = (self._index[sub_key] for sub_key in key)
+    
+                return ColumnCollection(cols).as_readonly()
+            else:
+>               return self._index[key][1]
+                       ^^^^^^^^^^^^^^^^
+E               KeyError: 'is_active'
+
+../benchmark/.venv/lib/python3.14/site-packages/sqlalchemy/sql/base.py:1716: KeyError
+________________ test_lu05_league_active_idx_declared_on_model _________________
+
+league_tbl = Table('league', MetaData(), Column('id', BigInteger(), table=<league>, primary_key=True, nullable=False, server_defaul...alse, server_default=DefaultClause(<sqlalchemy.sql.functions.now at 0x10a487790; now>, for_update=False)), schema=None)
+
+    def test_lu05_league_active_idx_declared_on_model(league_tbl):
+        """모델 측 metadata 에 'league_active_idx' 인덱스가 등록되어야 함.
+    
+        dev 가 SQLAlchemy `Index('league_active_idx', League.is_active,
+        postgresql_where=...)` 로 선언하면 통과. 마이그레이션만 만들고 모델에
+        선언 안 하면 fail.
+        """
+        names = {idx.name for idx in league_tbl.indexes}
+>       assert "league_active_idx" in names, (
+            f"league_active_idx 모델 인덱스 선언 필요 (existing: {names})"
+        )
+E       AssertionError: league_active_idx 모델 인덱스 선언 필요 (existing: {'league_type_idx'})
+E       assert 'league_active_idx' in {'league_type_idx'}
+
+tests/unit/test_league_is_active.py:87: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_league_is_active.py::test_lu01_is_active_column_exists
+FAILED tests/unit/test_league_is_active.py::test_lu02_is_active_is_boolean - ...
+FAILED tests/unit/test_league_is_active.py::test_lu03_is_active_not_null - Ke...
+FAILED tests/unit/test_league_is_active.py::test_lu04_is_active_server_default_true
+FAILED tests/unit/test_league_is_active.py::test_lu05_league_active_idx_declared_on_model
+========================= 5 failed, 1 passed in 0.31s ==========================
