@@ -5,7 +5,7 @@
     "path": "N/A (DB infra task)",
     "fe_mockup_ref": null
   },
-  "state": "IMPL_PUSHED",
+  "state": "TESTING",
   "owner": "be-test",
   "iteration": {
     "test_loop": 0,
@@ -23,9 +23,10 @@
   "evidence": {
     "unit_test_log": ".claude/state/endpoint-flow/phase-1-db-schema/unit.log",
     "integration_test_log": ".claude/state/endpoint-flow/phase-1-db-schema/integration.log",
-    "test_verdict": "UNIT_PASS_INTEGRATION_SKIPPED",
+    "alembic_log": null,
+    "test_verdict": "UNIT_PASS_INTEGRATION_BLOCKED",
     "coverage_pct": null,
-    "notes": "Unit tests 74/74 PASS. Integration tests 28 skipped — TEST_DATABASE_URL not set (conftest env guard, per spec)."
+    "notes": "Unit 74/74 PASS against be-dev impl (commit 92b0af8). Integration tests not executed: (1) Supabase direct host IPv6-only and host has no IPv6; (2) prod-DB alembic upgrade denied by auto-mode classifier — requires explicit user authorization or pooler URL."
   },
   "gates": {
     "spec_approved_by": "be-reviewer",
@@ -33,9 +34,18 @@
     "review_approved_by": null,
     "merge_approved_by": null
   },
-  "blockers": [],
+  "blockers": [
+    {
+      "kind": "env",
+      "detail": "Supabase direct host db.<ref>.supabase.co resolves to IPv6 only; this host has no IPv6 connectivity. Need pooler URL (aws-0-<region>.pooler.supabase.com:6543/5432) in .env."
+    },
+    {
+      "kind": "authorization",
+      "detail": "alembic upgrade against prod Supabase blocked by Claude Code auto-mode classifier (teammate agent directive insufficient; requires direct user authorization per agent-workflow.md §5-§6)."
+    }
+  ],
   "next_action": {
-    "agent": "be-test",
-    "command": "run pytest against be-infra-phase-1-test HEAD to validate impl; set TEST_DATABASE_URL to exercise integration tests"
+    "agent": "human / team-lead",
+    "command": "Provide Supabase pooler URL in .env OR authorize prod-DB migration explicitly OR provide a local/dev Postgres TEST_DATABASE_URL."
   }
 }

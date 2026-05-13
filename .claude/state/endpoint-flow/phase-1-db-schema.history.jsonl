@@ -3,3 +3,5 @@
 {"ts":"2026-05-13T21:10:00+09:00","from":"SPEC_REVIEW","to":"SPEC_APPROVED","by":"be-reviewer","note":"APPROVE per phase-1-db-schema.review.json (minor 3 noted, no blockers)"}
 {"ts":"2026-05-13T21:11:00+09:00","from":"SPEC_APPROVED","to":"IMPL_IN_PROGRESS","by":"be-dev","note":"start implementation of 13 SQLAlchemy models + alembic initial migration + alembic/pydantic-settings infra"}
 {"ts":"2026-05-13T21:25:00+09:00","from":"IMPL_IN_PROGRESS","to":"IMPL_PUSHED","by":"be-dev","note":"commit 92b0af8 pushed to be-infra-phase-1-test; unit 74/74 PASS, integration 28 skipped (TEST_DATABASE_URL unset)"}
+{"ts":"2026-05-13T21:40:00+09:00","from":"IMPL_PUSHED","to":"TESTING","by":"be-test","note":"start TESTING — run pytest against impl 92b0af8"}
+{"ts":"2026-05-13T21:50:00+09:00","from":"TESTING","to":"TESTING","by":"be-test","note":"BLOCKED: unit 74/74 PASS; integration not executed — (1) Supabase direct host IPv6-only + host has no IPv6, (2) alembic upgrade denied by auto-mode (requires user authorization). state stays TESTING pending env/auth resolution."}
