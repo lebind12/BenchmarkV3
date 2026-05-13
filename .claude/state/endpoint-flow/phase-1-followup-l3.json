@@ -1,0 +1,43 @@
+{
+  "endpoint_id": "phase-1-followup-l3-h2h-fixture",
+  "endpoint": {
+    "method": "N/A",
+    "path": "N/A (additive DB migration — 1 table)",
+    "fe_mockup_ref": null
+  },
+  "state": "REVIEW_PENDING",
+  "owner": "be-reviewer",
+  "iteration": {
+    "test_loop": 1,
+    "review_loop": 0
+  },
+  "artifacts": {
+    "spec_path": "docs/spec/endpoints/phase-1-followup-l3.md",
+    "test_plan_path": "docs/spec/endpoints/phase-1-followup-l3.testplan.md",
+    "test_code_path": "tests/unit/test_l3_h2h_models.py",
+    "integration_test_code_path": "tests/integration/test_l3_h2h_migration.py",
+    "impl_branch": "l3-h2h",
+    "impl_commit": "ce11513",
+    "migrations": ["alembic/versions/0004_h2h_fixture.py"]
+  },
+  "evidence": {
+    "unit_test_log": ".claude/state/endpoint-flow/phase-1-followup-l3/unit.log",
+    "integration_test_log": ".claude/state/endpoint-flow/phase-1-followup-l3/integration.log",
+    "test_verdict": "ALL_PASS",
+    "unit_summary": "5 passed in 0.26s",
+    "integration_summary": "9 passed in 57.64s",
+    "coverage_pct": null,
+    "notes": "be-test 정식 TESTING 재실행 완료. Unit 5/5 PASS + Integration 9/9 PASS against impl ce11513 via Supabase pooler. L3I-02 함수 인덱스 (LEAST/GREATEST/kickoff_at DESC) + L3I-07 순서 무관 H2H 쿼리 + L3I-08/09 downgrade reversibility 모두 green. Prod DB at 0004_h2h_fixture."
+  },
+  "gates": {
+    "spec_approved_by": "be-reviewer",
+    "test_passed_at": "2026-05-14T10:35:00+09:00",
+    "review_approved_by": null,
+    "merge_approved_by": null
+  },
+  "blockers": [],
+  "next_action": {
+    "agent": "be-reviewer",
+    "command": "code review impl_commit ce11513 against db-schema.md §3.17 + phase-1-followup-l3.md (h2h_fixture 컬럼/제약/함수 인덱스 정본 일치 확인)"
+  }
+}

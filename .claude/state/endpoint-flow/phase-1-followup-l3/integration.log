@@ -1,0 +1,20 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.4, pytest-9.0.3, pluggy-1.6.0 -- /Users/woolee/benchmark/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/woolee/benchmark.l3-h2h
+configfile: pyproject.toml
+plugins: asyncio-1.3.0, anyio-4.13.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 9 items
+
+tests/integration/test_l3_h2h_migration.py::test_l3i01_17_tables PASSED  [ 11%]
+tests/integration/test_l3_h2h_migration.py::test_l3i02_h2h_pair_idx_is_functional_least_greatest PASSED [ 22%]
+tests/integration/test_l3_h2h_migration.py::test_l3i03_external_id_unique PASSED [ 33%]
+tests/integration/test_l3_h2h_migration.py::test_l3i04_home_away_not_null PASSED [ 44%]
+tests/integration/test_l3_h2h_migration.py::test_l3i05_league_external_id_null_allowed PASSED [ 55%]
+tests/integration/test_l3_h2h_migration.py::test_l3i06_fk_cascade_on_team_delete PASSED [ 66%]
+tests/integration/test_l3_h2h_migration.py::test_l3i07_query_pair_order_insensitive PASSED [ 77%]
+tests/integration/test_l3_h2h_migration.py::test_l3i08_downgrade_drops_h2h_only PASSED [ 88%]
+tests/integration/test_l3_h2h_migration.py::test_l3i09_reversibility_base_to_head PASSED [100%]
+
+============================== 9 passed in 57.64s ==============================

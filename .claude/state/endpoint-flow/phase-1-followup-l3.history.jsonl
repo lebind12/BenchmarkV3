@@ -1,0 +1,6 @@
+{"ts":"2026-05-14T09:40:00+09:00","from":"FE_REQUESTED","to":"SPEC_DRAFTING","by":"be-test","note":"team-lead 가 L3 (h2h_fixture) task 부여. db-schema.md §3.17 mirror. L2 머지 의존."}
+{"ts":"2026-05-14T09:55:00+09:00","from":"SPEC_DRAFTING","to":"SPEC_REVIEW","by":"be-test","note":"spec + testplan + unit/integration 4 파일 작성 완료. Red 확인 (5 unit ImportError). 함수 인덱스 LEAST/GREATEST + kickoff_at DESC 검증 포함. be-reviewer 핸드오프"}
+{"ts":"2026-05-14T01:15:00+09:00","from":"SPEC_APPROVED","to":"IMPL_IN_PROGRESS","by":"be-dev","note":"L3 implementation start: merge L2 (0003) base + 0004 migration + H2HFixture model"}
+{"ts":"2026-05-14T01:30:00+09:00","from":"IMPL_IN_PROGRESS","to":"IMPL_PUSHED","by":"be-dev","note":"commit ce11513 pushed; unit 5/5 + integration 9/9 PASS; prod DB at 0004_h2h_fixture"}
+{"ts":"2026-05-14T10:30:00+09:00","from":"IMPL_PUSHED","to":"TESTING","by":"be-test","note":"start TESTING — pytest against impl ce11513 via Supabase pooler"}
+{"ts":"2026-05-14T10:35:00+09:00","from":"TESTING","to":"REVIEW_PENDING","by":"be-test","note":"unit 5/5 PASS (0.26s), integration 9/9 PASS (57.64s). 함수 인덱스 + 순서 무관 쿼리 + reversibility 모두 green. handoff to be-reviewer."}
