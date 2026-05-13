@@ -1,0 +1,16 @@
+{
+  "get": "teams",
+  "parameters": {"league": "2", "season": "2024"},
+  "errors": [],
+  "results": 2,
+  "response": [
+    {
+      "team": {"id": 33, "name": "Manchester United", "code": "MUN", "country": "England", "founded": 1878, "national": false, "logo": "https://media.api-sports.io/football/teams/33.png"},
+      "venue": {"id": 556, "name": "Old Trafford", "city": "Manchester", "capacity": 76212, "surface": "grass"}
+    },
+    {
+      "team": {"id": 541, "name": "Real Madrid", "code": "MAD", "country": "Spain", "founded": 1902, "national": false, "logo": "https://media.api-sports.io/football/teams/541.png"},
+      "venue": {"id": 1456, "name": "Estadio Santiago Bernabéu", "city": "Madrid", "capacity": 85454, "surface": "grass"}
+    }
+  ]
+}

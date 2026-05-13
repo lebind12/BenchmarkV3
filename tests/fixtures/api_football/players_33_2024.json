@@ -1,0 +1,57 @@
+{
+  "get": "players",
+  "parameters": {"team": "33", "season": "2024"},
+  "errors": [],
+  "results": 2,
+  "paging": {"current": 1, "total": 1},
+  "response": [
+    {
+      "player": {
+        "id": 2,
+        "name": "Bruno Fernandes",
+        "firstname": "Bruno",
+        "lastname": "Fernandes",
+        "age": 30,
+        "birth": {"date": "1994-09-08", "place": "Maia", "country": "Portugal"},
+        "nationality": "Portugal",
+        "height": "179 cm",
+        "weight": "69 kg",
+        "injured": false,
+        "photo": "https://media.api-sports.io/football/players/2.png"
+      },
+      "statistics": [
+        {
+          "team": {"id": 33, "name": "Manchester United"},
+          "league": {"id": 39, "name": "Premier League", "country": "England", "season": 2024},
+          "games": {"appearences": 10, "lineups": 10, "minutes": 900, "position": "Midfielder", "number": 8, "rating": "7.43", "captain": true},
+          "goals": {"total": 4, "assists": 5, "conceded": null, "saves": null},
+          "cards": {"yellow": 2, "red": 0}
+        }
+      ]
+    },
+    {
+      "player": {
+        "id": 99,
+        "name": "S. Sherring",
+        "firstname": "Sam",
+        "lastname": "Sherring",
+        "age": 24,
+        "birth": {"date": "2000-01-01", "place": null, "country": "England"},
+        "nationality": "England",
+        "height": "unknown",
+        "weight": null,
+        "injured": false,
+        "photo": null
+      },
+      "statistics": [
+        {
+          "team": {"id": 33, "name": "Manchester United"},
+          "league": {"id": 39, "name": "Premier League", "country": "England", "season": 2024},
+          "games": {"appearences": null, "lineups": null, "minutes": null, "position": "Defender", "number": null, "rating": null, "captain": false},
+          "goals": {"total": null, "assists": null, "conceded": null, "saves": null},
+          "cards": {"yellow": null, "red": null}
+        }
+      ]
+    }
+  ]
+}

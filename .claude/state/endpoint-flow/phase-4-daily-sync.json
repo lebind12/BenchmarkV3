@@ -1,0 +1,42 @@
+{
+  "endpoint_id": "phase-4-daily-sync",
+  "endpoint": {
+    "method": "N/A",
+    "path": "N/A (background worker)",
+    "fe_mockup_ref": null
+  },
+  "state": "SPEC_REVIEW",
+  "owner": "be-reviewer",
+  "iteration": {
+    "test_loop": 0,
+    "review_loop": 0
+  },
+  "artifacts": {
+    "spec_path": "docs/spec/endpoints/phase-4-daily-sync.md",
+    "test_plan_path": "docs/spec/endpoints/phase-4-daily-sync.testplan.md",
+    "test_code_path": "tests/unit/test_daily_sync.py",
+    "integration_test_code_path": "tests/integration/test_daily_sync.py",
+    "fixtures_dir": "tests/fixtures/api_football/",
+    "impl_branch": "w2-daily-sync",
+    "impl_commit": null,
+    "migrations": []
+  },
+  "evidence": {
+    "unit_test_log": ".claude/state/endpoint-flow/phase-4-daily-sync/unit.log",
+    "integration_test_log": null,
+    "test_verdict": "RED_EXPECTED",
+    "coverage_pct": null,
+    "notes": "Red 확인: 21 unit errors (ModuleNotFoundError: app.workers.daily_sync). 통합도 같은 import 단계에서 fail 예상. dev 가 app/workers/daily_sync/ 모듈 작성 후 통과해야 함. 인터페이스 가정: parsers.{parse_league,parse_team,parse_fixture,parse_player,parse_standing,parse_height_cm,parse_weight_kg,combine_fixture_detail} / queries.{active_leagues,build_active_fixture_query} / api_client.{DefaultAPIFootballClient,DailySyncFatalError} / runner.run_cycle(session, api_client, *, semaphore=6) / steps.step1~9. 11개 mock fixture JSON 작성 완료."
+  },
+  "gates": {
+    "spec_approved_by": null,
+    "test_passed_at": null,
+    "review_approved_by": null,
+    "merge_approved_by": null
+  },
+  "blockers": [],
+  "next_action": {
+    "agent": "be-reviewer",
+    "command": "review W2 spec/testplan/test code + 11 mock fixture JSONs vs docs/workers/daily-sync.md SSOT"
+  }
+}

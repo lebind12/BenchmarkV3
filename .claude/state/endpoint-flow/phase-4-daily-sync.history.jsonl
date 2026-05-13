@@ -1,0 +1,2 @@
+{"ts":"2026-05-13T23:30:00+09:00","from":"FE_REQUESTED","to":"SPEC_DRAFTING","by":"be-test","note":"team-lead 가 W2 (daily-sync 워커) task 부여. docs/workers/daily-sync.md SSOT mirror + L1 league.is_active 의존"}
+{"ts":"2026-05-13T23:55:00+09:00","from":"SPEC_DRAFTING","to":"SPEC_REVIEW","by":"be-test","note":"spec + testplan + unit/integration + 11 mock fixture JSON 작성 완료. Red 확인 (21 unit errors, ModuleNotFoundError: app.workers.daily_sync). be-reviewer 핸드오프"}
