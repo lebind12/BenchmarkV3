@@ -1,0 +1,65 @@
+{
+  "endpoint_id": "phase-1-db-schema",
+  "endpoint": {
+    "method": "N/A",
+    "path": "DB infra (13 tables)",
+    "fe_mockup_ref": null
+  },
+  "state": "MERGE_GATE",
+  "owner": "team-lead (human approval)",
+  "iteration": {
+    "plan_review_loop": 0,
+    "test_loop": 0,
+    "review_loop": 0
+  },
+  "artifacts": {
+    "spec_path": "docs/spec/endpoints/phase-1-db-schema.md",
+    "test_plan_path": "docs/spec/endpoints/phase-1-db-schema.testplan.md",
+    "test_code_paths": ["tests/unit/test_db_models.py", "tests/integration/test_db_schema_migration.py", "tests/conftest.py"],
+    "test_branch": "be-infra-phase-1-test",
+    "test_commit": "e62d911",
+    "impl_branch": "be-infra-phase-1-test",
+    "impl_commit": "92b0af8",
+    "migrations": ["alembic/versions/20260513_2100_0001_initial_schema.py"]
+  },
+  "evidence": {
+    "spec_review_artifact": ".claude/state/endpoint-flow/phase-1-db-schema.review.json",
+    "files_reviewed_review_pending": [
+      "app/models/base.py",
+      "app/models/__init__.py",
+      "app/models/league.py",
+      "app/models/venue.py",
+      "app/models/team.py",
+      "app/models/player.py",
+      "app/models/fixture.py",
+      "app/models/standings.py",
+      "app/models/app_user.py",
+      "alembic/versions/20260513_2100_0001_initial_schema.py",
+      "alembic/env.py",
+      "alembic.ini (sqlalchemy.url line)",
+      "app/core/config.py"
+    ],
+    "unit_test_result": "74/74 PASS (per team-lead handoff)",
+    "integration_test_result": "28/28 PASS (per team-lead handoff, Supabase pooler isolated schema)"
+  },
+  "gates": {
+    "spec_approved_by": "be-reviewer",
+    "spec_approved_at": "2026-05-13T00:00:00+09:00",
+    "test_passed_at": "2026-05-13T21:30:00+09:00",
+    "review_approved_by": "be-reviewer",
+    "review_approved_at": "2026-05-13T21:45:00+09:00",
+    "merge_approved_by": null
+  },
+  "blockers": [
+    {
+      "type": "HUMAN_APPROVAL_REQUIRED",
+      "reason": "Migration change — per agent-workflow §4 gate 5, 마이그레이션 영역 변경은 자동 머지 차단. 사람 승인 필요.",
+      "raised_by": "be-reviewer",
+      "raised_at": "2026-05-13T21:45:00+09:00"
+    }
+  ],
+  "next_action": {
+    "agent": "team-lead / human",
+    "command": "review .claude/state/endpoint-flow/phase-1-db-schema.review.json (REVIEW_PENDING stage), then merge be-infra-phase-1-test → backend if approved"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "endpoint_id": "phase-1-db-schema",
+  "reviewer": "be-reviewer",
+  "latest_stage": "REVIEW_PENDING",
+  "stages": [
+    {
+      "stage": "SPEC_REVIEW",
+      "reviewed_commit": "a57a188",
+      "branch": "be-infra-phase-1-test",
+      "verdict": "APPROVE",
+      "next_state": "SPEC_APPROVED",
+      "summary": "Spec mirror exactly matches SSOT (docs/spec/db-schema.md). Testplan covers all critical scenarios. Isolated schema fixture compliant.",
+      "critical": [],
+      "major": [],
+      "minor": [
+        {"id": "M-01", "area": "tests/integration", "note": "league→player_season_stat CASCADE 직접 케이스 없음 (인접 I-18/I-19/I-21 로 우회 커버)."},
+        {"id": "M-02", "area": "tests/integration", "note": "fixture NULL score 명시 케이스 없음 (다른 INSERT 들로 암묵 커버)."},
+        {"id": "M-03", "area": "spec", "note": "phase-1-db-schema.md §2 체크리스트의 team 항목에 code 컬럼 명시 권장."}
+      ],
+      "recommendations": []
+    },
+    {
+      "stage": "REVIEW_PENDING",
+      "reviewed_impl_commit": "92b0af8",
+      "reviewed_test_commit": "e62d911",
+      "branch": "be-infra-phase-1-test",
+      "verdict": "APPROVE",
+      "next_state": "MERGE_GATE",
+      "summary": "13 SQLAlchemy 모델과 단일 alembic 마이그레이션이 docs/spec/db-schema.md §3~§7 의 컬럼/타입/NULL/server_default/CHECK/UNIQUE/PK(composite)/FK action(CASCADE/SET NULL)/인덱스(functional COALESCE, goals DESC 포함)를 모두 반영한다. config 는 pydantic-settings + lru_cache 패턴으로 env 전용 — 하드코딩 secret 없음 (alembic.ini 와 config.py 의 placeholder URL 은 default sentinel, env override 됨). env.py 는 app.models.Base.metadata 를 target 으로 지정하고 SQLALCHEMY_DATABASE_URL/DATABASE_URL 환경변수를 우선 사용 (통합 테스트의 schema 격리 옵션과 호환). 마이그레이션은 신규 13 테이블 생성으로 destructive 없음, FK 의존 순서 정확 (league → venue → team → team_translation/team_season → player → player_translation → player_season_stat → fixture → fixture_detail → standings → app_user), downgrade 는 역순으로 모든 인덱스/테이블 drop. 단위 74/74, 통합 28/28 PASS 보고 확인.",
+      "critical": [],
+      "major": [],
+      "minor": [
+        {"id": "M-04", "area": "app/models/player.py", "note": "PlayerSeasonStat 의 __table_args__ 에 정의된 player_season_stat_topscorer_idx 가 'goals' 컬럼명만 전달하여 ORM 메타데이터 레벨에서 DESC 방향이 빠져 있다. 실제 DB DDL 은 migration 의 op.execute('... goals DESC') 로 정확히 생성되므로 동작은 정상. 향후 autogenerate diff 시 mismatch 가능 — sa.text('goals DESC') 사용 권장."},
+        {"id": "M-05", "area": "app/models/*.py", "note": "timestamp/Date 컬럼들의 Mapped 타입이 `Mapped[object]` 로 선언됨. 컬럼 타입(DateTime/Date)이 권위적이라 런타임 영향 없음. SQLAlchemy 2.x 관용은 `Mapped[datetime]` / `Mapped[date]`. 타입 힌트 품질만 영향 — 추후 cleanup 권장."},
+        {"id": "M-06", "area": "app/models", "note": "모델 간 ORM relationship() 미설정 (양방향 back_populates 등). 본 phase 1 spec 은 컬럼/FK 만 요구하므로 위반 아님. endpoint 구현 phase 에서 ORM join 사용 시 추가 필요 — TODO 추적용 권고."}
+      ],
+      "recommendations": [
+        {"id": "R-01", "area": "carryover", "note": "SPEC_REVIEW 의 M-01 (league→player_season_stat CASCADE 통합 케이스) 미반영. minor 라 verdict 영향 없으나 phase 2 endpoint 구현 전 보강 가능."},
+        {"id": "R-02", "area": "alembic", "note": "functional index 2건(standings_uniq, player_season_stat_topscorer_idx)을 raw op.execute 로 생성하고 downgrade 에서도 DROP INDEX IF EXISTS 로 대칭 처리한 점이 적절. 향후 SQLAlchemy 가 functional unique 를 정식 지원하면 마이그레이션 cleanup 고려."},
+        {"id": "R-03", "area": "security", "note": "alembic.ini 와 config.py 의 default placeholder URL 은 sentinel 로만 동작하고 실 환경에서는 env override 로 대체됨. 명확. 향후 startup 시 default 사용 detect 시 warning log 추가 고려."}
+      ],
+      "checklist_outcome": {
+        "spec_implemented_correctly": "PASS (13 모델 + 마이그레이션 모두 SSOT 일치)",
+        "unit_tests_passed": "PASS (74/74)",
+        "integration_tests_passed": "PASS (28/28)",
+        "coverage_pct_ge_80": "N/A (DB infra task; 메타데이터 introspection 테스트라 coverage 의미 약함)",
+        "security_auth_changes": "N/A (auth endpoint 미구현; app_user 테이블만 생성)",
+        "migration_backward_compat_2step": "N/A (초기 13 테이블 신규 생성)",
+        "migration_downgrade_present": "PASS",
+        "destructive_sql_in_migration": "NONE",
+        "sql_injection_n_plus_1_tx": "NONE (raw SQL 모두 고정 DDL, 사용자 입력 보간 없음)",
+        "prod_secrets_in_code": "NONE (env 전용, placeholder 만 default)",
+        "ai_residuals": "NONE (TODO/placeholder 잔재 없음 — config.py 의 'placeholder' 는 sentinel 의도)"
+      },
+      "merge_gate_advisory": {
+        "gate1_unit_pass": true,
+        "gate2_integration_pass": true,
+        "gate3_coverage_ge_80": "N/A",
+        "gate4_review_approved": true,
+        "gate5_human_approval_required": "REQUIRED — 본 변경이 마이그레이션 영역이라 자동 머지 차단. 사용자/메인 승인 후 머지 진행 권장.",
+        "gate6_ci_status_check": "N/A (Phase 7 GH Actions 미작성)"
+      }
+    }
+  ]
+}

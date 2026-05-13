@@ -1,0 +1,2 @@
+{"ts":"2026-05-13T00:00:00+09:00","from":"SPEC_REVIEW","to":"SPEC_APPROVED","by":"be-reviewer","note":"verdict APPROVE; minor/recommendation only; details in phase-1-db-schema.review.json"}
+{"ts":"2026-05-13T21:45:00+09:00","from":"REVIEW_PENDING","to":"MERGE_GATE","by":"be-reviewer","note":"verdict APPROVE on impl 92b0af8 + tests e62d911; minor only; human approval required (migration area, agent-workflow §4 gate 5)"}

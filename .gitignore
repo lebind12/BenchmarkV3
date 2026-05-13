@@ -31,3 +31,21 @@ htmlcov/
 
 # Harness / agent local state (kept out of repo unless explicit)
 out/
+
+# Claude Code local runtime (per-machine, not shared)
+.claude/memory/
+.claude/sessions/
+
+# Worktree-local copy of env
+.env
+
+# Vercel link metadata (linked via CLI, not shared)
+.vercel/
+
+# Claude Code state runtime - keep only endpoint-flow (workflow artifacts)
+.claude/state/*
+!.claude/state/endpoint-flow/
+
+# Supabase CLI runtime
+supabase/.temp/
+supabase/.branches/
