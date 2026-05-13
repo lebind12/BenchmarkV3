@@ -1,0 +1,41 @@
+{
+  "feature_id": "fixture-detail",
+  "feature": {
+    "title": "매치 디테일 페이지 — 헤더 + 3패널 (Sofascore 참조)",
+    "requirements_doc": "docs/features/fixture-detail.md"
+  },
+  "phase": "mock",
+  "state": "PLAN_REVIEW",
+  "owner": "fe-reviewer",
+  "iteration": {
+    "plan_review_loop": 0,
+    "playwright_loop": 0,
+    "review_loop": 0,
+    "integration_loop": 0
+  },
+  "endpoint_requests": [
+    "GET__api_v1_fixtures__id",
+    "GET__api_v1_fixtures__id__events",
+    "GET__api_v1_fixtures__id__lineups",
+    "GET__api_v1_fixtures__id__h2h",
+    "GET__api_v1_fixtures__id__statistics",
+    "GET__api_v1_fixtures__id__league_standings"
+  ],
+  "be_dependency_state": {},
+  "artifacts": {
+    "spec_path": "docs/features/fixture-detail.spec.md",
+    "devplan_path": "docs/features/fixture-detail.devplan.md",
+    "testplan_path": "docs/features/fixture-detail.testplan.md",
+    "branch": "fe-feat-fixture-detail",
+    "commit": null,
+    "playwright_e2e_paths": []
+  },
+  "evidence": {},
+  "gates": {
+    "plan_approved_by": null,
+    "review_approved_by": null,
+    "merge_approved_by": null
+  },
+  "blockers": [],
+  "next_action": { "agent": "fe-reviewer", "command": "review plan artifacts for fixture-detail" }
+}
