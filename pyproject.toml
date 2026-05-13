@@ -1,0 +1,48 @@
+[project]
+name = "benchmark-backend"
+version = "0.0.0"
+description = "축구 정보 사이트 백엔드 (방송용 페이지 포함). FastAPI + SQLAlchemy + Supabase."
+requires-python = ">=3.11"
+readme = "README.md"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "sqlalchemy>=2.0",
+    "alembic>=1.13",
+    "pydantic>=2.7",
+    "pydantic-settings>=2.4",
+    "httpx>=0.27",
+    "psycopg[binary]>=3.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.6",
+    "mypy>=1.10",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+exclude = ["tests*", "frontend*", "scripts*", "seeds*", "docs*", "out*"]
+
+[tool.pytest.ini_options]
+markers = [
+    "unit: fast in-process tests (no external services)",
+    "integration: tests touching DB / Upstash / external APIs",
+]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+ignore_missing_imports = true
