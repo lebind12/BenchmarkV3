@@ -30,6 +30,16 @@ db_url = (
     or os.environ.get("DATABASE_URL")
     or get_settings().database_url
 )
+
+# Normalise libpq-style URLs to the psycopg3 dialect we ship in pyproject.
+# Supabase / GH Secrets typically expose `postgresql://...` which SQLAlchemy
+# would route to psycopg2 (not installed). Rewriting here keeps env files
+# untouched and applies uniformly to integration tests + prod migrations.
+if db_url.startswith("postgresql://"):
+    db_url = "postgresql+psycopg://" + db_url[len("postgresql://"):]
+elif db_url.startswith("postgres://"):
+    db_url = "postgresql+psycopg://" + db_url[len("postgres://"):]
+
 config.set_main_option("sqlalchemy.url", db_url)
 
 target_metadata = Base.metadata
