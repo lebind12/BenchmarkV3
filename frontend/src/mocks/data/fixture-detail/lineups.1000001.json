@@ -1,0 +1,45 @@
+{
+  "home": {
+    "team": { "external_id": 40, "slug": "liverpool", "name": "Liverpool", "name_ko": "리버풀", "short_name_ko": "리버풀", "logo_url": null },
+    "formation": "4-3-3",
+    "coach": { "name": "Arne Slot" },
+    "start_xi": [
+      { "player": { "external_id": 101, "slug": "alisson", "name": "Alisson", "name_ko": "알리송", "photo_url": null }, "number": 1, "position": "GK", "grid": "1:1", "rating": 7.6, "minutes": 90 },
+      { "player": { "external_id": 102, "slug": "trent", "name": "Alexander-Arnold", "name_ko": "알렉산더아놀드", "photo_url": null }, "number": 66, "position": "RB", "grid": "2:4", "rating": 7.4, "minutes": 90 },
+      { "player": { "external_id": 103, "slug": "konate", "name": "Konaté", "name_ko": "코나테", "photo_url": null }, "number": 5, "position": "CB", "grid": "2:3", "rating": 7.0, "minutes": 90 },
+      { "player": { "external_id": 104, "slug": "vvd", "name": "van Dijk", "name_ko": "판데이크", "photo_url": null }, "number": 4, "position": "CB", "grid": "2:2", "rating": 6.8, "minutes": 78 },
+      { "player": { "external_id": 105, "slug": "robertson", "name": "Robertson", "name_ko": "로버트슨", "photo_url": null }, "number": 26, "position": "LB", "grid": "2:1", "rating": 7.2, "minutes": 90 },
+      { "player": { "external_id": 106, "slug": "mac", "name": "Mac Allister", "name_ko": "맥앨리스터", "photo_url": null }, "number": 10, "position": "CM", "grid": "3:3", "rating": 7.5, "minutes": 90 },
+      { "player": { "external_id": 107, "slug": "szobo", "name": "Szoboszlai", "name_ko": "쇼보슬러이", "photo_url": null }, "number": 8, "position": "CM", "grid": "3:2", "rating": 7.1, "minutes": 90 },
+      { "player": { "external_id": 108, "slug": "endo", "name": "Endo", "name_ko": "엔도", "photo_url": null }, "number": 3, "position": "CM", "grid": "3:1", "rating": 6.9, "minutes": 90 },
+      { "player": { "external_id": 1, "slug": "salah", "name": "Salah", "name_ko": "살라", "photo_url": null }, "number": 11, "position": "RW", "grid": "4:3", "rating": 8.1, "minutes": 90 },
+      { "player": { "external_id": 3, "slug": "nunez", "name": "Nunez", "name_ko": "누녜스", "photo_url": null }, "number": 9, "position": "ST", "grid": "4:2", "rating": 7.8, "minutes": 90 },
+      { "player": { "external_id": 4, "slug": "diaz", "name": "Diaz", "name_ko": "디아스", "photo_url": null }, "number": 7, "position": "LW", "grid": "4:1", "rating": 7.6, "minutes": 60 }
+    ],
+    "bench": [
+      { "player": { "external_id": 109, "slug": "jota", "name": "Jota", "name_ko": "조타", "photo_url": null }, "number": 20, "position": "FW", "grid": null, "rating": 6.7, "minutes": 30 },
+      { "player": { "external_id": 110, "slug": "elliott", "name": "Elliott", "name_ko": "엘리엇", "photo_url": null }, "number": 19, "position": "MF", "grid": null, "rating": null, "minutes": null }
+    ]
+  },
+  "away": {
+    "team": { "external_id": 42, "slug": "arsenal", "name": "Arsenal", "name_ko": "아스널", "short_name_ko": "아스널", "logo_url": null },
+    "formation": "4-2-3-1",
+    "coach": { "name": "Mikel Arteta" },
+    "start_xi": [
+      { "player": { "external_id": 201, "slug": "raya", "name": "Raya", "name_ko": "라야", "photo_url": null }, "number": 22, "position": "GK", "grid": "1:1", "rating": 6.5, "minutes": 90 },
+      { "player": { "external_id": 202, "slug": "white", "name": "White", "name_ko": "화이트", "photo_url": null }, "number": 4, "position": "RB", "grid": "2:4", "rating": 6.8, "minutes": 90 },
+      { "player": { "external_id": 203, "slug": "saliba", "name": "Saliba", "name_ko": "살리바", "photo_url": null }, "number": 2, "position": "CB", "grid": "2:3", "rating": 7.0, "minutes": 90 },
+      { "player": { "external_id": 204, "slug": "gabriel", "name": "Gabriel", "name_ko": "가브리에우", "photo_url": null }, "number": 6, "position": "CB", "grid": "2:2", "rating": 6.9, "minutes": 90 },
+      { "player": { "external_id": 205, "slug": "calafiori", "name": "Calafiori", "name_ko": "칼라피오리", "photo_url": null }, "number": 33, "position": "LB", "grid": "2:1", "rating": 6.7, "minutes": 90 },
+      { "player": { "external_id": 7, "slug": "rice", "name": "Rice", "name_ko": "라이스", "photo_url": null }, "number": 41, "position": "DM", "grid": "3:2", "rating": 7.2, "minutes": 90 },
+      { "player": { "external_id": 207, "slug": "partey", "name": "Partey", "name_ko": "파티", "photo_url": null }, "number": 5, "position": "DM", "grid": "3:1", "rating": 6.8, "minutes": 90 },
+      { "player": { "external_id": 208, "slug": "odegaard", "name": "Ødegaard", "name_ko": "외데고르", "photo_url": null }, "number": 8, "position": "AM", "grid": "4:3", "rating": 7.3, "minutes": 90 },
+      { "player": { "external_id": 2, "slug": "saka", "name": "Saka", "name_ko": "사카", "photo_url": null }, "number": 7, "position": "AM", "grid": "4:2", "rating": 7.8, "minutes": 90 },
+      { "player": { "external_id": 210, "slug": "martinelli", "name": "Martinelli", "name_ko": "마르티넬리", "photo_url": null }, "number": 11, "position": "AM", "grid": "4:1", "rating": 6.6, "minutes": 90 },
+      { "player": { "external_id": 211, "slug": "havertz", "name": "Havertz", "name_ko": "하베르츠", "photo_url": null }, "number": 29, "position": "ST", "grid": "5:1", "rating": 6.4, "minutes": 90 }
+    ],
+    "bench": [
+      { "player": { "external_id": 212, "slug": "trossard", "name": "Trossard", "name_ko": "트로사르", "photo_url": null }, "number": 19, "position": "FW", "grid": null, "rating": null, "minutes": null }
+    ]
+  }
+}

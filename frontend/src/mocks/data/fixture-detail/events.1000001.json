@@ -1,0 +1,11 @@
+{
+  "events": [
+    { "id": "e1", "minute": 23, "extra": null, "team_external_id": 40, "type": "goal", "player": { "external_id": 1, "slug": "salah", "name": "Salah", "name_ko": "살라", "photo_url": null }, "assist": { "external_id": 5, "slug": "trent", "name": "Alexander-Arnold", "name_ko": "알렉산더아놀드", "photo_url": null }, "player_out": null, "detail": null },
+    { "id": "e2", "minute": 31, "extra": null, "team_external_id": 42, "type": "yellow_card", "player": { "external_id": 7, "slug": "rice", "name": "Rice", "name_ko": "라이스", "photo_url": null }, "assist": null, "player_out": null, "detail": "Foul" },
+    { "id": "e3", "minute": 45, "extra": 2, "team_external_id": 42, "type": "goal", "player": { "external_id": 2, "slug": "saka", "name": "Saka", "name_ko": "사카", "photo_url": null }, "assist": null, "player_out": null, "detail": null },
+    { "id": "e4", "minute": 60, "extra": null, "team_external_id": 40, "type": "substitution", "player": { "external_id": 8, "slug": "jota", "name": "Jota", "name_ko": "조타", "photo_url": null }, "assist": null, "player_out": { "external_id": 9, "slug": "diaz", "name": "Diaz", "name_ko": "디아스", "photo_url": null }, "detail": null },
+    { "id": "e5", "minute": 67, "extra": null, "team_external_id": 40, "type": "goal", "player": { "external_id": 3, "slug": "nunez", "name": "Nunez", "name_ko": "누녜스", "photo_url": null }, "assist": null, "player_out": null, "detail": null },
+    { "id": "e6", "minute": 78, "extra": null, "team_external_id": 40, "type": "red_card", "player": { "external_id": 10, "slug": "vvd", "name": "van Dijk", "name_ko": "판데이크", "photo_url": null }, "assist": null, "player_out": null, "detail": null },
+    { "id": "e7", "minute": 89, "extra": null, "team_external_id": 40, "type": "goal_penalty", "player": { "external_id": 4, "slug": "diaz2", "name": "Diaz", "name_ko": "디아스", "photo_url": null }, "assist": null, "player_out": null, "detail": null }
+  ]
+}

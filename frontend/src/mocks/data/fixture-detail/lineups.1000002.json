@@ -1,0 +1,16 @@
+{
+  "home": {
+    "team": { "external_id": 50, "slug": "man-city", "name": "Manchester City", "name_ko": "맨체스터 시티", "short_name_ko": "맨시티", "logo_url": null },
+    "formation": null,
+    "coach": null,
+    "start_xi": [],
+    "bench": []
+  },
+  "away": {
+    "team": { "external_id": 33, "slug": "man-united", "name": "Manchester United", "name_ko": "맨체스터 유나이티드", "short_name_ko": "맨유", "logo_url": null },
+    "formation": null,
+    "coach": null,
+    "start_xi": [],
+    "bench": []
+  }
+}

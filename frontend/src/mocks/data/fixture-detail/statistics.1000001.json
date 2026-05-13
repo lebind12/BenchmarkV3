@@ -1,0 +1,28 @@
+{
+  "home": {
+    "team_external_id": 40,
+    "possession": 58,
+    "shots_total": 16,
+    "shots_on_target": 7,
+    "passes_total": 540,
+    "passes_accuracy": 88,
+    "corners": 8,
+    "fouls": 9,
+    "yellow": 1,
+    "red": 1,
+    "offsides": 2
+  },
+  "away": {
+    "team_external_id": 42,
+    "possession": 42,
+    "shots_total": 11,
+    "shots_on_target": 4,
+    "passes_total": 392,
+    "passes_accuracy": 82,
+    "corners": 5,
+    "fouls": 12,
+    "yellow": 2,
+    "red": 0,
+    "offsides": 3
+  }
+}

@@ -2,24 +2,40 @@
 </script>
 
 <template>
-  <main class="main">
-    <h1>축구 정보 사이트</h1>
-    <p>Vue 3 + Vite MPA — 메인 entry placeholder</p>
-  </main>
+  <div class="app-shell">
+    <header class="app-header" data-testid="app-header">
+      <strong>축구 정보</strong>
+    </header>
+    <router-view />
+  </div>
 </template>
 
 <style scoped>
-.main {
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.app-header {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  border-bottom: 1px solid var(--muted);
   font-family: system-ui, -apple-system, sans-serif;
-  padding: 2rem;
-  color: #111;
+  color: var(--foreground);
 }
-h1 {
-  font-size: 2rem;
-  margin: 0 0 0.5rem;
-}
-p {
+</style>
+<style>
+html,
+body,
+#app {
+  height: 100%;
   margin: 0;
-  color: #555;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--foreground);
+}
+body {
+  overflow: hidden;
 }
 </style>

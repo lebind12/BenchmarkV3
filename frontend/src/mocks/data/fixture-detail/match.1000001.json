@@ -1,0 +1,43 @@
+{
+  "external_id": 1000001,
+  "league": {
+    "external_id": 39,
+    "slug": "premier-league",
+    "name": "Premier League",
+    "name_ko": "프리미어 리그",
+    "short_name_ko": "EPL",
+    "logo_url": null
+  },
+  "round": "32라운드",
+  "status_short": "FT",
+  "status_long": "Match Finished",
+  "kickoff_at": "2026-05-13T10:00:00Z",
+  "venue": { "name": "Anfield", "city": "Liverpool" },
+  "referee": "J. Pratt",
+  "home": {
+    "external_id": 40,
+    "slug": "liverpool",
+    "name": "Liverpool",
+    "name_ko": "리버풀",
+    "short_name_ko": "리버풀",
+    "logo_url": null
+  },
+  "away": {
+    "external_id": 42,
+    "slug": "arsenal",
+    "name": "Arsenal",
+    "name_ko": "아스널",
+    "short_name_ko": "아스널",
+    "logo_url": null
+  },
+  "goals_home": 3,
+  "goals_away": 1,
+  "penalty_home": null,
+  "penalty_away": null,
+  "goal_events": [
+    { "minute": 23, "extra": null, "scorer": { "external_id": 1, "slug": "salah", "name": "Salah", "name_ko": "살라", "photo_url": null }, "team_external_id": 40, "type": "normal" },
+    { "minute": 45, "extra": 2, "scorer": { "external_id": 2, "slug": "saka", "name": "Saka", "name_ko": "사카", "photo_url": null }, "team_external_id": 42, "type": "normal" },
+    { "minute": 67, "extra": null, "scorer": { "external_id": 3, "slug": "nunez", "name": "Nunez", "name_ko": "누녜스", "photo_url": null }, "team_external_id": 40, "type": "normal" },
+    { "minute": 89, "extra": null, "scorer": { "external_id": 4, "slug": "diaz", "name": "Diaz", "name_ko": "디아스", "photo_url": null }, "team_external_id": 40, "type": "penalty" }
+  ]
+}

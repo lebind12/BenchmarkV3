@@ -1,0 +1,6 @@
+{
+  "events": [
+    { "id": "u1", "minute": 12, "extra": null, "team_external_id": 541, "type": "goal", "player": { "external_id": 11, "slug": "bellingham", "name": "Bellingham", "name_ko": "벨링엄", "photo_url": null }, "assist": null, "player_out": null, "detail": null },
+    { "id": "u2", "minute": 55, "extra": null, "team_external_id": 157, "type": "goal", "player": { "external_id": 12, "slug": "kane", "name": "Kane", "name_ko": "케인", "photo_url": null }, "assist": null, "player_out": null, "detail": null }
+  ]
+}

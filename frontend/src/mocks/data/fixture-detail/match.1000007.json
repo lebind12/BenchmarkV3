@@ -1,0 +1,41 @@
+{
+  "external_id": 1000007,
+  "league": {
+    "external_id": 2,
+    "slug": "champions-league",
+    "name": "UEFA Champions League",
+    "name_ko": "챔피언스 리그",
+    "short_name_ko": "UCL",
+    "logo_url": null
+  },
+  "round": "Group A · Matchday 5",
+  "status_short": "FT",
+  "status_long": "Match Finished",
+  "kickoff_at": "2026-05-12T19:00:00Z",
+  "venue": { "name": "Santiago Bernabéu", "city": "Madrid" },
+  "referee": "M. Oliver",
+  "home": {
+    "external_id": 541,
+    "slug": "real-madrid",
+    "name": "Real Madrid",
+    "name_ko": "레알 마드리드",
+    "short_name_ko": "레알",
+    "logo_url": null
+  },
+  "away": {
+    "external_id": 157,
+    "slug": "bayern",
+    "name": "Bayern Munich",
+    "name_ko": "바이에른 뮌헨",
+    "short_name_ko": "바이에른",
+    "logo_url": null
+  },
+  "goals_home": 2,
+  "goals_away": 2,
+  "penalty_home": null,
+  "penalty_away": null,
+  "goal_events": [
+    { "minute": 12, "extra": null, "scorer": { "external_id": 11, "slug": "bellingham", "name": "Bellingham", "name_ko": "벨링엄", "photo_url": null }, "team_external_id": 541, "type": "normal" },
+    { "minute": 55, "extra": null, "scorer": { "external_id": 12, "slug": "kane", "name": "Kane", "name_ko": "케인", "photo_url": null }, "team_external_id": 157, "type": "normal" }
+  ]
+}

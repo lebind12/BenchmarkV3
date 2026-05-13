@@ -1,0 +1,38 @@
+{
+  "external_id": 1000002,
+  "league": {
+    "external_id": 39,
+    "slug": "premier-league",
+    "name": "Premier League",
+    "name_ko": "프리미어 리그",
+    "short_name_ko": "EPL",
+    "logo_url": null
+  },
+  "round": "33라운드",
+  "status_short": "NS",
+  "status_long": "Not Started",
+  "kickoff_at": "2026-05-20T10:00:00Z",
+  "venue": { "name": "Etihad Stadium", "city": "Manchester" },
+  "referee": null,
+  "home": {
+    "external_id": 50,
+    "slug": "man-city",
+    "name": "Manchester City",
+    "name_ko": "맨체스터 시티",
+    "short_name_ko": "맨시티",
+    "logo_url": null
+  },
+  "away": {
+    "external_id": 33,
+    "slug": "man-united",
+    "name": "Manchester United",
+    "name_ko": "맨체스터 유나이티드",
+    "short_name_ko": "맨유",
+    "logo_url": null
+  },
+  "goals_home": null,
+  "goals_away": null,
+  "penalty_home": null,
+  "penalty_away": null,
+  "goal_events": []
+}
