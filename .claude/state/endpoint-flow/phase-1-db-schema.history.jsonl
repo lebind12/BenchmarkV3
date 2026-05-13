@@ -1,0 +1,2 @@
+{"ts":"2026-05-13T20:30:00+09:00","from":"FE_REQUESTED","to":"SPEC_DRAFTING","by":"be-test","note":"team-lead 가 Phase 1 DB schema task 부여. db-schema.md SSOT 기준으로 spec/testplan/test 작성 시작"}
+{"ts":"2026-05-13T20:45:00+09:00","from":"SPEC_DRAFTING","to":"SPEC_REVIEW","by":"be-test","note":"spec + testplan + unit/integration test 4파일 작성 완료. Red 확인 (ImportError - app/models 미작성). be-reviewer 핸드오프"}
