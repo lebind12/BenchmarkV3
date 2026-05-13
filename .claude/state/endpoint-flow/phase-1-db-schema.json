@@ -2,64 +2,53 @@
   "endpoint_id": "phase-1-db-schema",
   "endpoint": {
     "method": "N/A",
-    "path": "DB infra (13 tables)",
+    "path": "N/A (DB infra task)",
     "fe_mockup_ref": null
   },
-  "state": "MERGE_GATE",
-  "owner": "team-lead (human approval)",
+  "state": "REVIEW_PENDING",
+  "owner": "be-reviewer",
   "iteration": {
-    "plan_review_loop": 0,
-    "test_loop": 0,
+    "test_loop": 1,
     "review_loop": 0
   },
   "artifacts": {
     "spec_path": "docs/spec/endpoints/phase-1-db-schema.md",
     "test_plan_path": "docs/spec/endpoints/phase-1-db-schema.testplan.md",
-    "test_code_paths": ["tests/unit/test_db_models.py", "tests/integration/test_db_schema_migration.py", "tests/conftest.py"],
-    "test_branch": "be-infra-phase-1-test",
-    "test_commit": "e62d911",
+    "test_code_path": "tests/unit/test_db_models.py",
+    "integration_test_code_path": "tests/integration/test_db_schema_migration.py",
     "impl_branch": "be-infra-phase-1-test",
     "impl_commit": "92b0af8",
     "migrations": ["alembic/versions/20260513_2100_0001_initial_schema.py"]
   },
   "evidence": {
-    "spec_review_artifact": ".claude/state/endpoint-flow/phase-1-db-schema.review.json",
-    "files_reviewed_review_pending": [
-      "app/models/base.py",
-      "app/models/__init__.py",
-      "app/models/league.py",
-      "app/models/venue.py",
-      "app/models/team.py",
-      "app/models/player.py",
-      "app/models/fixture.py",
-      "app/models/standings.py",
-      "app/models/app_user.py",
-      "alembic/versions/20260513_2100_0001_initial_schema.py",
-      "alembic/env.py",
-      "alembic.ini (sqlalchemy.url line)",
-      "app/core/config.py"
-    ],
-    "unit_test_result": "74/74 PASS (per team-lead handoff)",
-    "integration_test_result": "28/28 PASS (per team-lead handoff, Supabase pooler isolated schema)"
+    "unit_test_log": ".claude/state/endpoint-flow/phase-1-db-schema/unit.log",
+    "integration_test_log": ".claude/state/endpoint-flow/phase-1-db-schema/integration.log",
+    "alembic_log": ".claude/state/endpoint-flow/phase-1-db-schema/alembic.log",
+    "test_verdict": "PASS",
+    "unit_summary": "74 passed in 0.23s",
+    "integration_summary": "28 passed in 142.12s (2:22)",
+    "coverage_pct": null,
+    "notes": "Unit 74/74 PASS, integration 28/28 PASS against impl 92b0af8 via Supabase pooler (aws-1-ap-northeast-1, port 5432). alembic upgrade head on prod public schema NOT executed — auto-mode classifier requires direct user authorization (teammate-relay insufficient). Equivalent verification done inside isolated schemas (I-01 + I-02 + I-28)."
   },
   "gates": {
     "spec_approved_by": "be-reviewer",
-    "spec_approved_at": "2026-05-13T00:00:00+09:00",
-    "test_passed_at": "2026-05-13T21:30:00+09:00",
-    "review_approved_by": "be-reviewer",
-    "review_approved_at": "2026-05-13T21:45:00+09:00",
+    "test_passed_at": "2026-05-13T22:15:00+09:00",
+    "review_approved_by": null,
     "merge_approved_by": null
   },
   "blockers": [
     {
-      "type": "HUMAN_APPROVAL_REQUIRED",
-      "reason": "Migration change — per agent-workflow §4 gate 5, 마이그레이션 영역 변경은 자동 머지 차단. 사람 승인 필요.",
-      "raised_by": "be-reviewer",
-      "raised_at": "2026-05-13T21:45:00+09:00"
+      "kind": "authorization",
+      "severity": "operational",
+      "detail": "Step 2 (alembic upgrade on prod public schema) still requires direct user authorization. Tests themselves are GREEN; recommend CI/CD-driven application per agent-workflow.md §5."
     }
   ],
   "next_action": {
-    "agent": "team-lead / human",
-    "command": "review .claude/state/endpoint-flow/phase-1-db-schema.review.json (REVIEW_PENDING stage), then merge be-infra-phase-1-test → backend if approved"
-  }
+    "agent": "be-reviewer",
+    "command": "Code review impl 92b0af8 (13 SQLAlchemy models + alembic initial migration) against spec. All tests green. Note authorization-only blocker on prod migration step."
+  },
+  "fixes_during_testing": [
+    "tests/conftest.py: switched to per-connect SET search_path event listener (Supabase pooler did not honor libpq options) + driver scheme normalization (postgresql:// -> postgresql+psycopg://)",
+    "tests/integration/test_db_schema_migration.py: invoke alembic via `sys.executable -m alembic` (was using PATH which resolved to anaconda Python without psycopg); removed URL-embedded options (configparser % interpolation issue)"
+  ]
 }
