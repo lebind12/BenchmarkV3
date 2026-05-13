@@ -1,2 +1,5 @@
 {"ts":"2026-05-13T20:30:00+09:00","from":"FE_REQUESTED","to":"SPEC_DRAFTING","by":"be-test","note":"team-lead 가 Phase 1 DB schema task 부여. db-schema.md SSOT 기준으로 spec/testplan/test 작성 시작"}
 {"ts":"2026-05-13T20:45:00+09:00","from":"SPEC_DRAFTING","to":"SPEC_REVIEW","by":"be-test","note":"spec + testplan + unit/integration test 4파일 작성 완료. Red 확인 (ImportError - app/models 미작성). be-reviewer 핸드오프"}
+{"ts":"2026-05-13T21:10:00+09:00","from":"SPEC_REVIEW","to":"SPEC_APPROVED","by":"be-reviewer","note":"APPROVE per phase-1-db-schema.review.json (minor 3 noted, no blockers)"}
+{"ts":"2026-05-13T21:11:00+09:00","from":"SPEC_APPROVED","to":"IMPL_IN_PROGRESS","by":"be-dev","note":"start implementation of 13 SQLAlchemy models + alembic initial migration + alembic/pydantic-settings infra"}
+{"ts":"2026-05-13T21:25:00+09:00","from":"IMPL_IN_PROGRESS","to":"IMPL_PUSHED","by":"be-dev","note":"commit 92b0af8 pushed to be-infra-phase-1-test; unit 74/74 PASS, integration 28 skipped (TEST_DATABASE_URL unset)"}

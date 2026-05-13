@@ -17,7 +17,7 @@
     "test_code_path": "tests/unit/test_db_models.py",
     "integration_test_code_path": "tests/integration/test_db_schema_migration.py",
     "impl_branch": "be-infra-phase-1-test",
-    "impl_commit": "PENDING_COMMIT",
+    "impl_commit": "92b0af8",
     "migrations": ["alembic/versions/20260513_2100_0001_initial_schema.py"]
   },
   "evidence": {
