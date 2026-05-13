@@ -5,8 +5,8 @@
     "path": "N/A (additive DB migration)",
     "fe_mockup_ref": null
   },
-  "state": "SPEC_REVIEW",
-  "owner": "be-reviewer",
+  "state": "SPEC_APPROVED",
+  "owner": "be-dev",
   "iteration": {
     "test_loop": 0,
     "review_loop": 0
@@ -28,14 +28,14 @@
     "notes": "Red 확인: 5 fail / 1 pass. LU-01~LU-05 (모델 is_active + index 미정의) fail, LU-06 (회귀 방지) pass. 통합은 0002 마이그레이션 미생성으로 alembic upgrade 가 0001 까지만 적용 → LI-01~LI-09 fail 예상. dev 가 모델 + 0002 마이그레이션 작성 후 통과해야 함."
   },
   "gates": {
-    "spec_approved_by": null,
+    "spec_approved_by": "be-reviewer",
     "test_passed_at": null,
     "review_approved_by": null,
     "merge_approved_by": null
   },
   "blockers": [],
   "next_action": {
-    "agent": "be-reviewer",
-    "command": "review L1 spec/testplan/test code at docs/spec/endpoints/phase-1-followup-league-active.md vs db-schema.md §3.1 (is_active 변경분)"
+    "agent": "be-dev",
+    "command": "Add is_active column via 0002 migration + update League model + ensure tests pass"
   }
 }

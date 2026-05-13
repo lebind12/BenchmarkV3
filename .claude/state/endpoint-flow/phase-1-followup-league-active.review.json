@@ -1,0 +1,69 @@
+{
+  "endpoint_id": "phase-1-followup-league-active",
+  "reviewer": "be-reviewer",
+  "latest_stage": "SPEC_REVIEW",
+  "stages": [
+    {
+      "stage": "SPEC_REVIEW",
+      "reviewed_commit": "bb61892",
+      "branch": "l1-league-active",
+      "verdict": "APPROVE",
+      "next_state": "SPEC_APPROVED",
+      "files_reviewed": [
+        "docs/spec/db-schema.md (SSOT §3.1 line 84, 91 — from main)",
+        "docs/spec/endpoints/phase-1-followup-league-active.md",
+        "docs/spec/endpoints/phase-1-followup-league-active.testplan.md",
+        "tests/unit/test_league_is_active.py",
+        "tests/integration/test_league_is_active_migration.py"
+      ],
+      "summary": "Spec mirror 는 db-schema.md §3.1 의 `is_active boolean NOT NULL DEFAULT true` 와 `league_active_idx ON league (is_active) WHERE is_active` 부분 인덱스 정의에 정확히 일치한다. 마이그레이션 메타데이터(revision=0002_league_is_active, down_revision='0001_initial_schema'), upgrade/downgrade 절차, 기존 0001 보호 원칙, PG11+ ADD COLUMN NOT NULL DEFAULT 의 metadata-only 안전성까지 모두 명세됨. Testplan LU-01~LU-06 + LI-01~LI-09 는 (1) 컬럼 NOT NULL DEFAULT true 동작, (2) INSERT default 백필, (3) partial index `WHERE is_active` 생성, (4) 0002의 0001 의존 체인, (5) downgrade reversibility (컬럼+인덱스 drop, league 테이블 유지), (6) is_active 토글 시나리오를 모두 커버한다. conftest 의 격리 schema fixture 재사용으로 prod schema 접근 없음.",
+      "critical": [],
+      "major": [],
+      "minor": [
+        {
+          "id": "M-01",
+          "area": "tests/integration",
+          "note": "LI-06 의 토글 케이스는 true → false 단방향만 검증. ADMIN 토글 실제 운영은 false → true 복원도 발생할 수 있으므로 역방향 케이스 1줄 추가하면 회귀 추적이 더 완전. (단, 본 task 가 endpoint 가 아닌 schema 변경이라 verdict 영향 없음)"
+        },
+        {
+          "id": "M-02",
+          "area": "tests/integration",
+          "note": "LI-04 는 새 INSERT 의 default 채움만 검증한다. PG의 ADD COLUMN ... DEFAULT 가 기존 row 를 metadata-only 로 백필한다는 점(spec §2)을 직접 시뮬레이션 하려면 downgrade 후 INSERT → upgrade → 기존 row.is_active=true 확인 케이스가 필요하나, 본 task 범위에서 시드/기존 row 가 정의되지 않아 명시 불가. spec §6 의 '5리그 시드는 본 task 외' 와 부합. minor / 정보성 기록만."
+        },
+        {
+          "id": "M-03",
+          "area": "spec / testplan",
+          "note": "spec §2 는 PG metadata-only fast 적용을 명시하지만, 'PG 11+' 버전 가드는 testplan 의 환경 가정에 명시되지 않는다. Supabase 가 PG14+ 라 실제 위험 없음 — 정보성 기록만."
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "R-01",
+          "area": "tests/unit",
+          "note": "LU-05 가 모델 레벨에서 `Index('league_active_idx', ...)` 선언을 강제한다. 마이그레이션만 만들고 모델에 선언 안 하면 fail — 적절한 가드. SQLAlchemy 메타데이터 일관성을 spec §4 에 한 줄 명시(Index 도 모델에서 선언 필수)하면 dev 가 더 명확."
+        },
+        {
+          "id": "R-02",
+          "area": "spec",
+          "note": "spec §3.1 'server_default=sa.true()' 표기 시 `sa.true()` 가 SQLAlchemy 의 true() construct 임을 dev 가 헷갈리지 않도록 import 경로(`from sqlalchemy import true as sa_true` 또는 `sa.text('true')`) 예시를 한 줄 추가 권장."
+        },
+        {
+          "id": "R-03",
+          "area": "tests/integration",
+          "note": "LI-09 는 alembic current 출력 문자열에 '0001_initial_schema' 가 들어 있는지로 의존 체인 검증. alembic CLI 출력 포맷이 환경 따라 변동될 수 있으니 향후 alembic API(`MigrationContext.get_current_revision()`)로 전환 고려."
+        }
+      ],
+      "checklist_outcome": {
+        "spec_matches_ssot": "PASS (db-schema.md §3.1 line 84, 91 정확 일치)",
+        "column_not_null_default_true_covered": "PASS (LU-03, LU-04, LI-01, LI-02, LI-04, LI-05)",
+        "default_backfill_covered": "PASS (LI-04 신규 INSERT default; 기존 row 백필은 본 task 범위 외)",
+        "partial_index_where_clause_covered": "PASS (LU-05 모델 선언 강제, LI-03 WHERE 키워드 검증, LI-07 존재 확인)",
+        "0002_depends_on_0001": "PASS (spec §3 + LI-09)",
+        "downgrade_reversibility": "PASS (LI-08 컬럼+인덱스 drop / league 테이블 유지, LI-09 current=0001)",
+        "admin_toggle_scenario": "PARTIAL (LI-06 단방향 토글만 — minor M-01)",
+        "isolated_schema_fixture_reused": "PASS",
+        "ssot_immutability_0001_protected": "PASS (spec §0 불변 원칙)"
+      }
+    }
+  ]
+}
