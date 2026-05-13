@@ -5,8 +5,8 @@
     "path": "N/A (additive DB migration — 1 table)",
     "fe_mockup_ref": null
   },
-  "state": "SPEC_REVIEW",
-  "owner": "be-reviewer",
+  "state": "SPEC_APPROVED",
+  "owner": "be-dev",
   "iteration": {
     "test_loop": 0,
     "review_loop": 0
@@ -28,7 +28,7 @@
     "notes": "Red 확인: 5 unit errors (ImportError H2HFixture). 통합은 L2 (0003) 미머지 + 0004 미생성으로 fail. dev 는 L2 머지 후 rebase 한 뒤 0004_h2h_fixture 작성 (down_revision='0003_transfer_injury_news'). 함수 인덱스 (LEAST/GREATEST/kickoff_at DESC) 은 raw SQL 또는 SQLAlchemy func.least/greatest 로 선언."
   },
   "gates": {
-    "spec_approved_by": null,
+    "spec_approved_by": "be-reviewer",
     "test_passed_at": null,
     "review_approved_by": null,
     "merge_approved_by": null

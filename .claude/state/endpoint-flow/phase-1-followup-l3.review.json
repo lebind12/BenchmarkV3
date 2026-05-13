@@ -1,0 +1,70 @@
+{
+  "endpoint_id": "phase-1-followup-l3",
+  "reviewer": "be-reviewer",
+  "latest_stage": "SPEC_REVIEW",
+  "stages": [
+    {
+      "stage": "SPEC_REVIEW",
+      "reviewed_commit": "9cf6cb3",
+      "branch": "l3-h2h",
+      "verdict": "APPROVE",
+      "next_state": "SPEC_APPROVED",
+      "files_reviewed": [
+        "docs/spec/db-schema.md §3.17 (SSOT, from main)",
+        "docs/spec/endpoints/phase-1-followup-l3.md",
+        "docs/spec/endpoints/phase-1-followup-l3.testplan.md",
+        "tests/unit/test_l3_h2h_models.py",
+        "tests/integration/test_l3_h2h_migration.py"
+      ],
+      "summary": "Spec mirror 가 SSOT §3.17 의 DDL (h2h_fixture 13 컬럼 + 함수 인덱스 `h2h_pair_idx (LEAST(home, away), GREATEST(home, away), kickoff_at DESC)`) 1:1 일치. 마이그레이션 메타데이터(revision='0004_h2h_fixture', down_revision='0003_transfer_injury_news')와 L2(0003) 머지 의존성 §1 명시, 기존 0001~0003 불변 원칙 §0 명시. FK CASCADE on both team FKs (양 팀 모두 DB 존재 필수 정책 — spec §3.17 노트 일치), league_external_id 는 5리그 외 대회 포함을 위해 FK 없는 nullable integer (정본 §3.17 명시 그대로). 함수 인덱스는 alembic `op.execute` raw SQL + SQLAlchemy 모델의 `Index('h2h_pair_idx', func.least(...), func.greatest(...), col.desc())` 동시 선언 가이드 (§5). Testplan L3U-01~05 + L3I-01~09 (총 14 케이스)이 (1) 17 테이블 회귀(16 + h2h_fixture), (2) 전 컬럼 타입/NULL/FK action, (3) external_id UNIQUE, (4) h2h_pair_idx 함수 인덱스 LEAST/GREATEST/DESC 표현식 (단위 metadata + 통합 indexdef 양쪽), (5) home/away_team_id NOT NULL 강제, (6) league_external_id NULL 허용(외부 대회), (7) FK CASCADE on team delete, (8) **순서 무관 H2H 쿼리 정확성** (L3I-07: (A,B) + (B,A) 두 row 가 LEAST/GREATEST 쌍 1쿼리로 모두 반환되고 (A,C) 제외, kickoff_at DESC 정렬), (9) downgrade -1 (h2h_fixture drop + 16 유지), (10) reversibility base↔head 까지 모두 커버. conftest isolated_db 재사용. 단위는 L2 미머지여도 17 테이블 회귀가 의미 있으려면 Base.metadata 에 L2 3 테이블이 있어야 한다는 점도 testplan §1 사전 조건에 명시.",
+      "critical": [],
+      "major": [],
+      "minor": [
+        {
+          "id": "M-01",
+          "area": "spec / testplan",
+          "note": "self-match 경계 케이스(home_team_id == away_team_id) 에 대한 정책이 spec §3.17 에 없음 (SSOT 도 명시 없음). API-Football 응답에서 발생 가능성 매우 낮으나, CHECK constraint 부재 — 운영상 데이터 유입 가능. SSOT 변경 사항이므로 본 task verdict 영향 없음. 향후 정책 결정 시 보강 권장."
+        },
+        {
+          "id": "M-02",
+          "area": "app/models declaration consistency",
+          "note": "spec §5 가 alembic 마이그레이션은 raw SQL (`op.execute('CREATE INDEX h2h_pair_idx ON ... LEAST/GREATEST ... DESC')`), SQLAlchemy 모델은 `Index(..., func.least(...), func.greatest(...), col.desc())` 의 dual declaration 을 가이드. 두 표현 사이 drift 위험 (인덱스 정의가 일치하지 않으면 autogenerate 시 noise). dev 측 구현 시 명시 주석으로 양쪽 동기화 권장 — minor."
+        },
+        {
+          "id": "M-03",
+          "area": "tests/integration",
+          "note": "L3I-02 의 indexdef 검증이 'LEAST(' / 'GREATEST(' / 'KICKOFF_AT' / 'DESC' 키워드 존재만 확인. PG indexdef 출력 포맷이 환경마다 다를 수 있어 더 엄밀히 expression list 를 parse 하는 케이스는 과잉 — 현재 검증 적절."
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "R-01",
+          "area": "tests/integration",
+          "note": "L3I-07 의 H2H 쿼리가 함수 인덱스 동작 자체를 검증한다(쿼리 결과 정확성). planner 가 실제로 h2h_pair_idx 를 선택하는지는 EXPLAIN ANALYZE 가 필요한데 planner 의존이라 PG 통계에 따라 변동 — 검증하지 않는 게 적절. 현 케이스 그대로 좋음."
+        },
+        {
+          "id": "R-02",
+          "area": "spec",
+          "note": "L2 머지 의존성을 spec §1 + testplan §1 모두 명시. 추가로 dev 가 rebase 누락 시 alembic 의 'Path is not directly downgradable' 에러 메시지를 보게 됨 — testplan 의 Red 기대 §4 에서 이 에러 텍스트 예시를 한 줄 보강하면 트러블슈팅 빠름."
+        },
+        {
+          "id": "R-03",
+          "area": "tests/unit",
+          "note": "L3U-05 의 `idx.expressions` blob 매칭(`least(`, `greatest(`, `desc`)이 SQLAlchemy 의 `func.least` / `func.greatest` / `col.desc()` 표현을 잘 캐치하지만, dev 가 `text('LEAST(...)')` 같은 raw text 로 선언하면 같은 blob 이 나와 통과 — 의도 충족. 함수 호출 객체 type 직접 검사는 SQLAlchemy internal 의존이라 권장 안 함."
+        }
+      ],
+      "checklist_outcome": {
+        "spec_matches_ssot_3_17": "PASS (13 컬럼 / external_id UNIQUE / 두 team FK CASCADE / league_external_id FK 없음 nullable / 함수 인덱스 정의)",
+        "down_revision_chain": "PASS (0004 → 0003_transfer_injury_news, L2 의존 §1 명시)",
+        "existing_migrations_immutable": "PASS (spec §0)",
+        "external_id_unique": "PASS (L3U-04, L3I-03)",
+        "functional_index_least_greatest_desc": "PASS (L3U-05 metadata blob, L3I-02 indexdef, L3I-07 쿼리 결과)",
+        "league_external_id_null_allowed": "PASS (L3I-05)",
+        "fk_cascade_on_team_delete": "PASS (L3I-06)",
+        "order_insensitive_h2h_query": "PASS (L3I-07 핵심 케이스)",
+        "downgrade_reversibility": "PASS (L3I-08 -1, L3I-09 base↔head)",
+        "isolated_schema_fixture": "PASS (isolated_db 재사용)"
+      }
+    }
+  ]
+}
