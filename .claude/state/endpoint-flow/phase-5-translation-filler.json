@@ -5,8 +5,8 @@
     "path": "N/A (background worker)",
     "fe_mockup_ref": null
   },
-  "state": "SPEC_REVIEW",
-  "owner": "be-reviewer",
+  "state": "SPEC_APPROVED",
+  "owner": "be-dev",
   "iteration": {
     "test_loop": 0,
     "review_loop": 0
@@ -28,14 +28,14 @@
     "notes": "Red 확인: 14 unit errors (ModuleNotFoundError: app.workers). 통합도 같은 import 단계에서 fail 예상. dev 가 app/workers/translation_filler/ 모듈 작성 후 통과해야 함. 인터페이스 가정: queue.fetch_queue / prompt.build_prompt / openai_client.{call, parse_response} / runner.run_cycle / scheduler.register-or-add_jobs."
   },
   "gates": {
-    "spec_approved_by": null,
+    "spec_approved_by": "be-reviewer",
     "test_passed_at": null,
     "review_approved_by": null,
     "merge_approved_by": null
   },
   "blockers": [],
   "next_action": {
-    "agent": "be-reviewer",
-    "command": "review W1 spec/testplan/test code vs docs/workers/translation-filler.md SSOT"
+    "agent": "be-dev",
+    "command": "Implement translation-filler worker per spec; tests must pass"
   }
 }

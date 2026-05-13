@@ -1,0 +1,84 @@
+{
+  "endpoint_id": "phase-5-translation-filler",
+  "reviewer": "be-reviewer",
+  "latest_stage": "SPEC_REVIEW",
+  "stages": [
+    {
+      "stage": "SPEC_REVIEW",
+      "reviewed_commit": "f50a139",
+      "branch": "w1-translation-filler",
+      "verdict": "APPROVE",
+      "next_state": "SPEC_APPROVED",
+      "files_reviewed": [
+        "docs/workers/translation-filler.md (SSOT, from main)",
+        "docs/spec/endpoints/phase-5-translation-filler.md",
+        "docs/spec/endpoints/phase-5-translation-filler.testplan.md",
+        "tests/unit/test_translation_filler.py",
+        "tests/integration/test_translation_filler.py"
+      ],
+      "summary": "Spec mirror 가 docs/workers/translation-filler.md SSOT 의 16 섹션을 BE 구현/테스트 관점으로 정확히 재정리. 불변 원칙(1분 폴링, gpt-3.5-turbo, team/player 만 처리·league 제외, semaphore=5, batch=50, 백오프 1s/2s/4s × 3회, response_format=json_object, temperature=0, max_tokens=100)이 spec §0 / §1 / §4 / §7 / §8 에 모두 명시. Testplan TF-U-01~09 + TF-I-01~07 은 (1) 큐 SQL 정확성 + league 미포함, (2) 빈 큐 즉시 종료, (3) prompt 빌더 5+ few-shot 예시, (4) JSON 파싱 4 변종, (5) OpenAI 호출 파라미터 정확성, (6) batch 50 / semaphore 5 가드, (7) 1s/2s/4s 백오프 시퀀스, (8) league entity 가 runner 에서 skip, (9) 5xx 재시도 후 skip, (10) JSON 깨짐 skip, (11) 멱등성(이미 채워진 row 호출 0회), (12) 부분 채움 시 기존값 보호, (13) 1분 폴링 스케줄러 등록 인자(interval/minutes=1/seconds=60) 까지 모두 커버. 통합 테스트는 isolated_db fixture 위에 monkeypatch 로 OpenAI client mock — 실 OpenAI 호출 0회 보장 (CLAUDE.md §11 비용 정책 + agent-workflow.md §8 외부 의존성 mock 정책 준수). dev API 인터페이스(queue.fetch_queue / prompt.build_prompt / openai_client.call / runner.run_cycle / scheduler.register|add_jobs)가 test 모듈 docstring 에 명시되어 dev 구현 가이드 역할도 한다.",
+      "critical": [],
+      "major": [],
+      "minor": [
+        {
+          "id": "M-01",
+          "area": "tests/integration",
+          "note": "spec §1 / §7 / §9 의 '같은 row 10 사이클 연속 실패 시 stdout 알람' 임계치 동작을 검증하는 케이스 없음. 통합에서 10 사이클 시뮬레이션은 부담스럽지만, 단위 레벨에서 fail-counter 누적이 10 도달 시 알람 함수 호출 mock 검증 1건 추가 가능."
+        },
+        {
+          "id": "M-02",
+          "area": "tests/integration",
+          "note": "spec §5 / §9 의 'OpenAI 4xx(인증/quota) → 사이클 abort + 운영자 알림' 케이스 미검증. 5xx (TF-I-03) 와 동일 패턴으로 4xx mock 1건 추가 가능."
+        },
+        {
+          "id": "M-03",
+          "area": "tests/integration",
+          "note": "spec §9 의 '큐 크기 ≥ 1000 알람' 임계치 검증 없음. mock fetch_queue 로 1000+ row 반환 후 알람 함수 호출 검증 1건 가능. (단, batch=50 가드와 별개 경로이므로 누락 시 회귀 위험 있음 — 그래도 minor)"
+        },
+        {
+          "id": "M-04",
+          "area": "tests/unit or integration",
+          "note": "spec §9 의 사이클 종료 stdout JSON 로그(cycle_started_at, duration_seconds, queue_size_at_start, processed_count, succeeded_count, failed_count, openai_calls, openai_errors, cost_estimate_usd) 9개 필드 포함 검증 케이스 없음. capsys 로 1줄 캡처 후 JSON 파싱하면 간단히 가드 가능."
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "R-01",
+          "area": "spec",
+          "note": "spec §6 멱등성: '이미 채워진 row 는 본 워커가 절대 덮어쓰지 않음' 정책을 UPDATE 절 수준으로 더 명확히 표현 권장. 예: `UPDATE *_translation SET name_ko=:v WHERE id=:id AND name_ko IS NULL` 형식. TF-I-06 부분 채움 시 short_name_ko 보호 케이스가 본 spec §6 의 1줄(\"권장\")에 의존 — dev 가 단일 UPDATE 로 두 컬럼 동시 갱신해버릴 수 있음. spec 본문에 컬럼별 conditional UPDATE 패턴 예시 1단락 추가 권장."
+        },
+        {
+          "id": "R-02",
+          "area": "tests/unit",
+          "note": "TF-U-08 의 `[s for s in sleeps if s in (1, 2, 4)][:3] == [1, 2, 4]` 필터가 우연한 0.x sleep 호출이 끼더라도 통과시키지만, 1/2/4 가 중복 호출되어도 통과한다(시퀀스 보존이지만 정확도 약함). 향후 명확히 첫 3개 인자가 [1,2,4] 인지로 강화 가능. (그러나 현 검증으로도 spec 요구는 충족)"
+        },
+        {
+          "id": "R-03",
+          "area": "tests/integration",
+          "note": "TF-I-07 의 fake_scheduler 검증은 `repr(call_args)` 문자열 매칭으로 'minutes=1', 'seconds=60', 'interval' 중 어느 하나만 들어가도 통과한다. 향후 APScheduler 의 IntervalTrigger 객체 / kwargs 직접 검증으로 좁히면 정확도 ↑."
+        },
+        {
+          "id": "R-04",
+          "area": "spec",
+          "note": "spec §4 의 timeout 이 'dev 결정 (권장 10s)' 으로 열려 있음. 운영 안정성 관점에서 SSOT 와 동일하게 본 spec 에서도 확정값으로 못박는 게 좋음 (10s 권장)."
+        }
+      ],
+      "checklist_outcome": {
+        "ssot_compliance_1min_polling": "PASS (spec §0 §1, TF-I-07)",
+        "ssot_compliance_empty_queue_short_circuit": "PASS (spec §3 Step 2, TF-U-02 / TF-I-02)",
+        "ssot_compliance_model_gpt35turbo": "PASS (spec §4, TF-U-05)",
+        "ssot_compliance_few_shot_from_seed_csv": "PASS (spec §4, TF-U-03 5+ examples)",
+        "ssot_compliance_semaphore_5": "PASS (spec §0 §8, TF-U-07)",
+        "ssot_compliance_batch_50": "PASS (spec §0 §3, TF-U-06)",
+        "ssot_compliance_alert_threshold_10_cycles": "PARTIAL (spec §0 §7 §9 명시 / 검증 케이스 없음 — minor M-01)",
+        "ssot_compliance_team_player_only_league_excluded": "PASS (spec §0 §2, TF-U-01 / TF-U-09 / TF-U-03 league raises)",
+        "integration_isolated_schema": "PASS (isolated_db fixture 재사용)",
+        "integration_mock_openai_no_real_call": "PASS (monkeypatch + AsyncMock, 실 호출 0)",
+        "idempotency_filled_row_protected": "PASS (TF-I-05 + TF-I-06 부분 채움 보호)",
+        "retry_backoff_1_2_4": "PASS (spec §7, TF-U-08 / TF-I-03)",
+        "response_parsing_4_variants": "PASS (TF-U-04 valid/broken/missing/empty)",
+        "logging_one_line_json": "PARTIAL (spec §9 명시 / 검증 케이스 없음 — minor M-04)"
+      }
+    }
+  ]
+}
