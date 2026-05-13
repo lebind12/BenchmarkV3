@@ -81,13 +81,17 @@ CREATE TABLE league (
     country_flag   text,                                 -- API country.flag
     slug           text        NOT NULL UNIQUE,
     current_season integer,                              -- 현재 진행 시즌 (예: 2024)
+    is_active      boolean     NOT NULL DEFAULT true,    -- daily-sync 적재 대상 여부. ADMIN 이 토글
     created_at     timestamptz NOT NULL DEFAULT now(),
     updated_at     timestamptz NOT NULL DEFAULT now(),
 
     CONSTRAINT league_type_check CHECK (type IN ('League', 'Cup'))
 );
 CREATE INDEX league_type_idx ON league (type);
+CREATE INDEX league_active_idx ON league (is_active) WHERE is_active;
 ```
+
+`is_active`: daily-sync 워커가 매 사이클 `WHERE is_active = true` 인 league 만 sync. ADMIN endpoint 로 동적 추가/제외. 초기 5리그 시드 시 모두 `is_active=true`.
 
 **시드 매핑 (5리그)**:
 
@@ -455,3 +459,4 @@ CREATE INDEX app_user_role_idx ON app_user (role);
 | 날짜 | 변경 |
 |---|---|
 | 2026-05-13 | 초기 스키마 13 테이블 합의 (메인 세션) |
+| 2026-05-13 | `league.is_active` 컬럼 추가 — ADMIN 이 동적으로 수집 league 추가/제외 가능 (월드컵/유로 등 추후 추가 시나리오) |

@@ -5,13 +5,16 @@
 축구 정보를 제공하는 웹사이트. 일부 페이지는 **방송용** 으로 디자인되어 방송 소프트웨어가 크로마키로 합성해 송출하는 용도로 사용된다.
 데이터 소스는 API-Football(Ultra plan), DB는 Supabase, 캐시/세션 보조는 Upstash, 백엔드는 FastAPI + SQLAlchemy.
 
-## 2. 대상 리그 (5개, 고정)
+## 2. 대상 리그 (초기 5개, ADMIN 이 동적 추가/제외 가능)
 
-- Premier League
-- UEFA Champions League
-- UEFA Europa League
-- Carabao Cup (EFL Cup)
-- FA Cup
+초기 시드 리그 (모두 `is_active=true`):
+- Premier League (external_id 39)
+- UEFA Champions League (external_id 2)
+- UEFA Europa League (external_id 3)
+- Carabao Cup / League Cup (external_id 48)
+- FA Cup (external_id 45)
+
+운영 중 ADMIN endpoint 로 추가 가능 (예: 월드컵, 유로). daily-sync 는 `league.is_active = true` 만 처리.
 
 ## 3. 데이터 정책
 
