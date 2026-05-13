@@ -1,0 +1,41 @@
+{
+  "endpoint_id": "phase-1-followup-league-active",
+  "endpoint": {
+    "method": "N/A",
+    "path": "N/A (additive DB migration)",
+    "fe_mockup_ref": null
+  },
+  "state": "IMPL_PUSHED",
+  "owner": "be-test",
+  "iteration": {
+    "test_loop": 0,
+    "review_loop": 0
+  },
+  "artifacts": {
+    "spec_path": "docs/spec/endpoints/phase-1-followup-league-active.md",
+    "test_plan_path": "docs/spec/endpoints/phase-1-followup-league-active.testplan.md",
+    "test_code_path": "tests/unit/test_league_is_active.py",
+    "integration_test_code_path": "tests/integration/test_league_is_active_migration.py",
+    "impl_branch": "l1-league-active",
+    "impl_commit": "491a89f",
+    "migrations": ["alembic/versions/0002_league_is_active.py"]
+  },
+  "evidence": {
+    "unit_test_log": ".claude/state/endpoint-flow/phase-1-followup-league-active/unit.log",
+    "integration_test_log": ".claude/state/endpoint-flow/phase-1-followup-league-active/integration.log",
+    "test_verdict": "ALL_PASS",
+    "coverage_pct": null,
+    "notes": "Unit 6/6 PASS (LU-01..LU-06). Integration 9/9 PASS (LI-01..LI-09) against TEST_DATABASE_URL Supabase. Phase-1 28/28 regression PASS. Prod DB advanced to 0002_league_is_active via `alembic upgrade head`."
+  },
+  "gates": {
+    "spec_approved_by": "be-reviewer",
+    "test_passed_at": "2026-05-13T22:40:00+09:00",
+    "review_approved_by": null,
+    "merge_approved_by": null
+  },
+  "blockers": [],
+  "next_action": {
+    "agent": "be-reviewer",
+    "command": "review impl_commit 491a89f against spec/db-schema.md §3.1"
+  }
+}
