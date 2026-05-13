@@ -28,8 +28,10 @@ created: 2026-05-14
 
 ```
 frontend/src/
+├── styles/
+│   └── themes.css                         # NEW — data-league → --theme-* swap
 ├── views/
-│   └── FixtureDetailView.vue              # 진입점
+│   └── FixtureDetailView.vue              # 진입점 (root 에 data-league binding)
 ├── components/fixture/
 │   ├── MatchHeader.vue                    # 25vh 헤더
 │   ├── GoalHistoryInline.vue              # 골 이력 인라인
@@ -339,13 +341,91 @@ API-Football 의 `lineups[].startXI[].player.grid` (`row:col` 좌표) 가 있으
 
 ---
 
-## 9. 색상 / 디자인 토큰
+## 9. 색상 / 디자인 토큰 — League 동적 테마
 
-- 헤더 배경 gradient: `linear-gradient(180deg, hsla(--league-{slug}-primary 0.08), transparent)`
-- 활성 서브탭 indicator: `--league-{slug}-accent`
-- 골 이력 ⚽ 아이콘: foreground
-- 카드 (옐로) 🟨 / 레드 🟥: 고정 컬러 (`#FFC107` / `#E53935`)
-- 빨강/녹/회 결과 배지 (H2H W/D/L): semantic tokens (success/warning/error)
+### 9.1 themes.css (본 feature 가 도입)
+
+`frontend/src/styles/themes.css`:
+
+```css
+/* 기본 (neutral fallback) — league 매핑 없을 때 */
+:root {
+  --theme-primary:    var(--muted);
+  --theme-secondary:  var(--muted-foreground);
+  --theme-accent:     var(--accent);
+  --theme-on-primary: var(--foreground);
+}
+
+[data-league="premier-league"] {
+  --theme-primary:    var(--league-epl-primary);
+  --theme-secondary:  var(--league-epl-secondary);
+  --theme-accent:     var(--league-epl-accent);
+  --theme-on-primary: var(--league-epl-on-primary);
+}
+[data-league="champions-league"] {
+  --theme-primary:    var(--league-ucl-primary);
+  --theme-secondary:  var(--league-ucl-secondary);
+  --theme-accent:     var(--league-ucl-accent);
+  --theme-on-primary: var(--league-ucl-on-primary);
+}
+[data-league="europa-league"] {
+  --theme-primary:    var(--league-uel-primary);
+  --theme-secondary:  var(--league-uel-secondary);
+  --theme-accent:     var(--league-uel-accent);
+  --theme-on-primary: var(--league-uel-on-primary);
+}
+[data-league="carabao-cup"] {
+  --theme-primary:    var(--league-carabao-primary);
+  --theme-secondary:  var(--league-carabao-secondary);
+  --theme-accent:     var(--league-carabao-accent);
+  --theme-on-primary: var(--league-carabao-on-primary);
+}
+[data-league="fa-cup"] {
+  --theme-primary:    var(--league-fa-primary);
+  --theme-secondary:  var(--league-fa-secondary);
+  --theme-accent:     var(--league-fa-accent);
+  --theme-on-primary: var(--league-fa-on-primary);
+}
+```
+
+`main.ts` 에서 `import '@/styles/leagues.css'` 다음에 `import '@/styles/themes.css'` (leagues.css 가 먼저 정의되어야 var() 가 resolve).
+
+### 9.2 페이지 루트 binding
+
+`FixtureDetailView.vue`:
+
+```vue
+<template>
+  <section
+    class="fixture-detail-root"
+    :data-league="store.match.value?.league?.slug ?? null"
+    :data-league-id="store.match.value?.league?.external_id ?? null"
+  >
+    <MatchHeader />
+    <ThreePanel> ... </ThreePanel>
+  </section>
+</template>
+```
+
+→ `store.match.value` 가 ok 상태로 도착하면 `data-league` 가 reactive 하게 변경 → CSS variable swap → 모든 자식 컴포넌트의 `var(--theme-*)` 자동 재계산.
+
+route param 변화 (`/fixtures/1000001` → `/fixtures/1000007`) 시 store.bootstrap 재실행, match 도착 시 `data-league` 갱신 → 새 league 색상 즉시 적용.
+
+### 9.3 컴포넌트에서의 사용 규칙
+
+- 모든 league-aware 강조 element 는 `var(--theme-primary)` / `--theme-secondary` / `--theme-accent` / `--theme-on-primary` 만 사용
+- `var(--league-epl-*)` 같은 **리그 직접 참조 금지** (CSS lint rule 또는 코드 리뷰로 검출)
+- `color-mix(in srgb, var(--theme-primary) 8%, transparent)` 같이 alpha 합성으로 다크/라이트 모드 모두 자연스러운 톤 확보
+
+### 9.4 그 외 컬러
+
+- 골 이력 ⚽ 아이콘: `var(--theme-primary)`
+- 카드 (옐로) 🟨 / 레드 🟥: 고정 컬러 (`#FFC107` / `#E53935`, league 무관)
+- H2H 결과 배지 (W/D/L): semantic tokens (success/warning/error) — league 색 적용 X (의미 우선)
+
+### 9.5 main-home 재사용 가능
+
+본 feature 가 도입하는 `themes.css` 는 main-home 의 fixture 카드 좌측 보더에도 사용 가능 (각 fixture card 마다 `data-league` binding). main-home 작업 후 통합 단계에서 fe-dev 결정.
 
 ---
 

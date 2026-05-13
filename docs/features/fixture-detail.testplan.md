@@ -79,8 +79,16 @@ mock 머지 게이트 = L1 + L2.
 | F55 | L3 prod BE 호출 — 데이터 변경 0회 | integration | POST/PUT/DELETE count = 0 | | | ✅ |
 | F56 | LCP < 1.5s | trace | margin 2.0s | | ✅ | |
 | F57 | 페이지 진입 lazy fetch — h2h/stats/standings 는 탭 활성화 전 fetch X | 1000001 | network log: 초기에 h2h/stats/standings 미호출 | | ✅ | |
+| F58 | **league 동적 테마 — root data-league** | EPL 매치 1000001 | `[data-testid="fixture-detail-root"]` 의 `data-league=="premier-league"` | ✅ | ✅ | |
+| F59 | **league 동적 테마 — 헤더 색상 적용** | 1000001 (EPL) | MatchHeader computed background = EPL primary 톤 (`var(--theme-primary)` resolve) | | ✅ | |
+| F60 | **league 동적 테마 — 서브탭 indicator** | 1000001 (EPL) → 1000007 (UCL) | 활성 탭 indicator 색상 EPL accent → UCL accent 로 swap | | ✅ | |
+| F61 | **league 동적 테마 — navigate 시 swap** | 1000001 → H2H row click → 1000007 | route 변화 후 root `data-league` 갱신, 헤더 색상 변화 (screenshot 회귀) | | ✅ | |
+| F62 | **league 동적 테마 — fallback (loading 중)** | 진입 직후 match.loading | `data-league` 속성 미존재, 헤더 neutral 색상 | ✅ | | |
+| F63 | **league 동적 테마 — WCAG AA 대비** | 5리그 매치 각 1개 | `--theme-on-primary` text on `--theme-primary` bg 콘트라스트 ≥ 4.5:1 (axe 또는 수동 측정) | | ✅ | |
+| F64 | **league 동적 테마 — 다크/라이트 모드 호환** | 1000001 EPL + 토글 | 두 모드 모두 헤더 가독 (스크린샷 baseline 2종) | | ✅ | |
+| F65 | **CSS lint — `--league-*` 직접 참조 금지** | 본 feature 컴포넌트 스타일 grep | `var(--league-` 매치 0건 (theme 변수만 사용) | ✅ | | |
 
-총 57 시나리오. L1 = 19, L2 = 36, L3 = 3.
+총 65 시나리오. L1 = 22, L2 = 40, L3 = 3.
 
 ---
 
@@ -97,6 +105,8 @@ mock 머지 게이트 = L1 + L2.
 | `tests/unit/components/fixture/MatchHeader.spec.ts` | F47 F48 F49 F50 |
 | `tests/unit/lib/formations.spec.ts` | resolveFormation 룩업 |
 | `tests/unit/stores/fixtureDetail.spec.ts` | bootstrap / setTab / lazy fetch / route watch |
+| `tests/unit/views/FixtureDetailView.spec.ts` | F58 F62 (root data-league binding) |
+| `tests/unit/styles/themes.spec.ts` (lint/grep style) | F65 (`--league-*` 직접 참조 0건) |
 
 L1 게이트: vitest exit 0.
 
