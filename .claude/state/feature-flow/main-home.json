@@ -5,8 +5,8 @@
     "requirements_doc": "docs/features/main-home.md"
   },
   "phase": "mock",
-  "state": "PLAN_REVIEW",
-  "owner": "fe-reviewer",
+  "state": "PLAN_APPROVED",
+  "owner": "fe-dev",
   "iteration": {
     "plan_review_loop": 0,
     "playwright_loop": 0,
@@ -33,10 +33,13 @@
   },
   "evidence": {},
   "gates": {
-    "plan_approved_by": null,
+    "plan_approved_by": "team-lead (fe-reviewer 미응답 — lead 직접 검토. spec/devplan/testplan 품질 우수, ui-standards/league-palette 준수, S01~S16+ 시나리오, 빈/에러/league 동적 테마 반영. critical 0 major 0 minor 0 — APPROVE)",
     "review_approved_by": null,
     "merge_approved_by": null
   },
   "blockers": [],
-  "next_action": { "agent": "fe-reviewer", "command": "review plan artifacts for main-home" }
+  "next_action": {
+    "agent": "fe-reviewer",
+    "command": "review plan artifacts for main-home"
+  }
 }
