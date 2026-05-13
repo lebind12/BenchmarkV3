@@ -1,0 +1,74 @@
+{
+  "items": [
+    {
+      "player": {
+        "external_id": 1100,
+        "slug": "erling-haaland",
+        "name_ko": "엘링 홀란드",
+        "name": "Erling Haaland",
+        "photo_url": null,
+        "team": { "external_id": 50, "slug": "manchester-city", "name_ko": "맨체스터 시티", "name": "Manchester City", "logo_url": null },
+        "league": { "external_id": 39, "slug": "premier-league", "name_ko": "프리미어리그", "name": "Premier League" }
+      },
+      "goals": 22,
+      "assists": 6,
+      "score": 28
+    },
+    {
+      "player": {
+        "external_id": 1101,
+        "slug": "mohamed-salah",
+        "name_ko": "모하메드 살라",
+        "name": "Mohamed Salah",
+        "photo_url": null,
+        "team": { "external_id": 40, "slug": "liverpool", "name_ko": "리버풀", "name": "Liverpool", "logo_url": null },
+        "league": { "external_id": 39, "slug": "premier-league", "name_ko": "프리미어리그", "name": "Premier League" }
+      },
+      "goals": 18,
+      "assists": 9,
+      "score": 27
+    },
+    {
+      "player": {
+        "external_id": 1102,
+        "slug": "bukayo-saka",
+        "name_ko": "부카요 사카",
+        "name": "Bukayo Saka",
+        "photo_url": null,
+        "team": { "external_id": 42, "slug": "arsenal", "name_ko": "아스날", "name": "Arsenal", "logo_url": null },
+        "league": { "external_id": 39, "slug": "premier-league", "name_ko": "프리미어리그", "name": "Premier League" }
+      },
+      "goals": 14,
+      "assists": 11,
+      "score": 25
+    },
+    {
+      "player": {
+        "external_id": 1103,
+        "slug": "kylian-mbappe",
+        "name_ko": "킬리안 음바페",
+        "name": "Kylian Mbappe",
+        "photo_url": null,
+        "team": { "external_id": 541, "slug": "real-madrid", "name_ko": "레알 마드리드", "name": "Real Madrid", "logo_url": null },
+        "league": { "external_id": 2, "slug": "champions-league", "name_ko": "챔피언스리그", "name": "UEFA Champions League" }
+      },
+      "goals": 12,
+      "assists": 7,
+      "score": 19
+    },
+    {
+      "player": {
+        "external_id": 1104,
+        "slug": "son-heung-min",
+        "name_ko": "손흥민",
+        "name": "Son Heung-min",
+        "photo_url": null,
+        "team": { "external_id": 47, "slug": "tottenham", "name_ko": "토트넘", "name": "Tottenham", "logo_url": null },
+        "league": { "external_id": 39, "slug": "premier-league", "name_ko": "프리미어리그", "name": "Premier League" }
+      },
+      "goals": 13,
+      "assists": 5,
+      "score": 18
+    }
+  ]
+}

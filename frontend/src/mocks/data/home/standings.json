@@ -1,0 +1,31 @@
+{
+  "39": {
+    "league": { "external_id": 39, "slug": "premier-league", "name_ko": "프리미어리그", "short_name_ko": "EPL", "name": "Premier League" },
+    "season": 2025,
+    "rows": [
+      { "rank": 1, "team": { "external_id": 40, "slug": "liverpool", "name_ko": "리버풀", "short_name_ko": "리버풀", "name": "Liverpool", "logo_url": null }, "points": 78, "played": 35, "win": 24, "draw": 6, "loss": 5, "goals_for": 78, "goals_against": 32 },
+      { "rank": 2, "team": { "external_id": 42, "slug": "arsenal", "name_ko": "아스날", "short_name_ko": "아스날", "name": "Arsenal", "logo_url": null }, "points": 74, "played": 35, "win": 22, "draw": 8, "loss": 5, "goals_for": 70, "goals_against": 30 },
+      { "rank": 3, "team": { "external_id": 50, "slug": "manchester-city", "name_ko": "맨체스터 시티", "short_name_ko": "맨시티", "name": "Manchester City", "logo_url": null }, "points": 71, "played": 35, "win": 21, "draw": 8, "loss": 6, "goals_for": 72, "goals_against": 35 },
+      { "rank": 4, "team": { "external_id": 49, "slug": "chelsea", "name_ko": "첼시", "short_name_ko": "첼시", "name": "Chelsea", "logo_url": null }, "points": 65, "played": 35, "win": 19, "draw": 8, "loss": 8, "goals_for": 62, "goals_against": 40 },
+      { "rank": 5, "team": { "external_id": 47, "slug": "tottenham", "name_ko": "토트넘", "short_name_ko": "토트넘", "name": "Tottenham", "logo_url": null }, "points": 60, "played": 35, "win": 18, "draw": 6, "loss": 11, "goals_for": 65, "goals_against": 50 },
+      { "rank": 6, "team": { "external_id": 33, "slug": "manchester-united", "name_ko": "맨체스터 유나이티드", "short_name_ko": "맨유", "name": "Manchester United", "logo_url": null }, "points": 55, "played": 35, "win": 16, "draw": 7, "loss": 12, "goals_for": 55, "goals_against": 48 }
+    ]
+  },
+  "2": {
+    "league": { "external_id": 2, "slug": "champions-league", "name_ko": "챔피언스리그", "short_name_ko": "UCL", "name": "UEFA Champions League" },
+    "season": 2025,
+    "rows": [
+      { "rank": 1, "team": { "external_id": 541, "slug": "real-madrid", "name_ko": "레알 마드리드", "short_name_ko": "레알", "name": "Real Madrid", "logo_url": null }, "points": 16, "played": 8, "win": 5, "draw": 1, "loss": 2, "goals_for": 17, "goals_against": 9 },
+      { "rank": 2, "team": { "external_id": 40, "slug": "liverpool", "name_ko": "리버풀", "short_name_ko": "리버풀", "name": "Liverpool", "logo_url": null }, "points": 15, "played": 8, "win": 5, "draw": 0, "loss": 3, "goals_for": 14, "goals_against": 7 }
+    ]
+  },
+  "3": {
+    "league": { "external_id": 3, "slug": "europa-league", "name_ko": "유로파리그", "short_name_ko": "UEL", "name": "UEFA Europa League" },
+    "season": 2025,
+    "rows": [
+      { "rank": 1, "team": { "external_id": 33, "slug": "manchester-united", "name_ko": "맨체스터 유나이티드", "short_name_ko": "맨유", "name": "Manchester United", "logo_url": null }, "points": 14, "played": 8, "win": 4, "draw": 2, "loss": 2, "goals_for": 12, "goals_against": 8 }
+    ]
+  },
+  "48": { "league": { "external_id": 48, "slug": "carabao-cup", "name_ko": "카라바오컵", "short_name_ko": "카라바오", "name": "Carabao Cup" }, "season": 2025, "rows": [] },
+  "45": { "league": { "external_id": 45, "slug": "fa-cup", "name_ko": "FA컵", "short_name_ko": "FA", "name": "FA Cup" }, "season": 2025, "rows": [] }
+}

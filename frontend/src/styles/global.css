@@ -1,0 +1,67 @@
+:root {
+  --color-bg: #ffffff;
+  --color-fg: #111827;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-card: #f9fafb;
+  --color-card-hover: #f3f4f6;
+  --header-height: 56px;
+  font-family: 'Pretendard', system-ui, -apple-system, sans-serif;
+}
+
+html.dark {
+  --color-bg: #0b0f17;
+  --color-fg: #e5e7eb;
+  --color-muted: #9ca3af;
+  --color-border: #1f2937;
+  --color-card: #111827;
+  --color-card-hover: #1f2937;
+}
+
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
+  color: var(--color-fg);
+}
+
+body {
+  overflow: hidden; /* ui-standards §1.1 */
+}
+
+.panel-scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+.panel-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.panel-scroll-wrap {
+  position: relative;
+  height: 100%;
+}
+.panel-scroll-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 24px;
+  background: linear-gradient(to bottom, transparent, var(--color-bg));
+  pointer-events: none;
+}
+
+button,
+a {
+  color: inherit;
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+[role='tab']:focus-visible {
+  outline: 2px solid var(--theme-primary, #2563eb);
+  outline-offset: 2px;
+}

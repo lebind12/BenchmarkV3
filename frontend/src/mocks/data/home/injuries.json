@@ -1,0 +1,59 @@
+{
+  "items": [
+    {
+      "id": "i1",
+      "player": {
+        "external_id": 3001, "slug": "rodri", "name_ko": "로드리", "name": "Rodri", "photo_url": null,
+        "team": { "external_id": 50, "slug": "manchester-city", "name_ko": "맨체스터 시티", "name": "Manchester City", "logo_url": null },
+        "league": { "external_id": 39, "slug": "premier-league", "name_ko": "프리미어리그", "name": "Premier League" }
+      },
+      "injury_type": "햄스트링",
+      "expected_return": "2026-06-01",
+      "reported_at": "2026-05-12"
+    },
+    {
+      "id": "i2",
+      "player": {
+        "external_id": 3002, "slug": "martin-odegaard", "name_ko": "마르틴 외데고르", "name": "Martin Ødegaard", "photo_url": null,
+        "team": { "external_id": 42, "slug": "arsenal", "name_ko": "아스날", "name": "Arsenal", "logo_url": null },
+        "league": { "external_id": 39, "slug": "premier-league", "name_ko": "프리미어리그", "name": "Premier League" }
+      },
+      "injury_type": "발목",
+      "expected_return": null,
+      "reported_at": "2026-05-13"
+    },
+    {
+      "id": "i3",
+      "player": {
+        "external_id": 3003, "slug": "vinicius-junior", "name_ko": "비니시우스 주니오르", "name": "Vinicius Junior", "photo_url": null,
+        "team": { "external_id": 541, "slug": "real-madrid", "name_ko": "레알 마드리드", "name": "Real Madrid", "logo_url": null },
+        "league": { "external_id": 2, "slug": "champions-league", "name_ko": "챔피언스리그", "name": "UEFA Champions League" }
+      },
+      "injury_type": "허벅지",
+      "expected_return": "2026-05-25",
+      "reported_at": "2026-05-11"
+    },
+    {
+      "id": "i4",
+      "player": {
+        "external_id": 3004, "slug": "bruno-fernandes", "name_ko": "브루노 페르난데스", "name": "Bruno Fernandes", "photo_url": null,
+        "team": { "external_id": 33, "slug": "manchester-united", "name_ko": "맨체스터 유나이티드", "name": "Manchester United", "logo_url": null },
+        "league": { "external_id": 39, "slug": "premier-league", "name_ko": "프리미어리그", "name": "Premier League" }
+      },
+      "injury_type": "감기",
+      "expected_return": "2026-05-18",
+      "reported_at": "2026-05-13"
+    },
+    {
+      "id": "i5",
+      "player": {
+        "external_id": 3005, "slug": "cole-palmer", "name_ko": "콜 파머", "name": "Cole Palmer", "photo_url": null,
+        "team": { "external_id": 49, "slug": "chelsea", "name_ko": "첼시", "name": "Chelsea", "logo_url": null },
+        "league": { "external_id": 39, "slug": "premier-league", "name_ko": "프리미어리그", "name": "Premier League" }
+      },
+      "injury_type": "근육 피로",
+      "expected_return": null,
+      "reported_at": "2026-05-14"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "items": [
+    {
+      "id": "n1",
+      "title_ko": "리버풀, 막판 동점골로 무승부",
+      "title": "Liverpool snatch late equalizer",
+      "summary_ko": "리버풀이 후반 추가시간 동점골로 1-1 무승부를 거뒀다.",
+      "source": "bbc.com",
+      "url": "https://example.com/news/1",
+      "thumbnail_url": null,
+      "published_at": "2026-05-14T08:00:00Z"
+    },
+    {
+      "id": "n2",
+      "title_ko": "맨시티 감독, 핵심 미드필더 부상 인정",
+      "title": "Man City boss confirms midfielder injury",
+      "summary_ko": "감독은 4주 결장 가능성을 언급했다.",
+      "source": "skysports.com",
+      "url": "https://example.com/news/2",
+      "thumbnail_url": null,
+      "published_at": "2026-05-14T06:30:00Z"
+    },
+    {
+      "id": "n3",
+      "title_ko": "아스날, 다음 시즌 영입 후보 3인 발표",
+      "title": "Arsenal target three summer signings",
+      "summary_ko": "이적시장 우선순위 3명.",
+      "source": "theguardian.com",
+      "url": "https://example.com/news/3",
+      "thumbnail_url": null,
+      "published_at": "2026-05-14T03:10:00Z"
+    },
+    {
+      "id": "n4",
+      "title_ko": "첼시, 새 감독 후보 인터뷰 진행",
+      "title": "Chelsea interview new manager candidate",
+      "summary_ko": "내부 결정은 5월 말 예정.",
+      "source": "athletic.com",
+      "url": "https://example.com/news/4",
+      "thumbnail_url": null,
+      "published_at": "2026-05-13T22:00:00Z"
+    },
+    {
+      "id": "n5",
+      "title_ko": "토트넘, 신예 공격수 1군 승격",
+      "title": "Spurs promote young striker to first team",
+      "summary_ko": "U21에서 시즌 12골.",
+      "source": "bbc.com",
+      "url": "https://example.com/news/5",
+      "thumbnail_url": null,
+      "published_at": "2026-05-13T18:00:00Z"
+    }
+  ]
+}

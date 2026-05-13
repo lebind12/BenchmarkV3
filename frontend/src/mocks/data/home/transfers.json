@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "id": "t1",
+      "player": {
+        "external_id": 2001, "slug": "jude-bellingham", "name_ko": "주드 벨링엄", "name": "Jude Bellingham", "photo_url": null,
+        "team": { "external_id": 541, "slug": "real-madrid", "name_ko": "레알 마드리드", "name": "Real Madrid", "logo_url": null },
+        "league": { "external_id": 2, "slug": "champions-league", "name_ko": "챔피언스리그", "name": "UEFA Champions League" }
+      },
+      "from_team": { "external_id": 165, "slug": "dortmund", "name_ko": "도르트문트", "short_name_ko": "도르트문트", "name": "Borussia Dortmund", "logo_url": null },
+      "to_team":   { "external_id": 541, "slug": "real-madrid", "name_ko": "레알 마드리드", "short_name_ko": "레알", "name": "Real Madrid", "logo_url": null },
+      "transfer_date": "2026-05-10",
+      "fee": "€103m"
+    },
+    {
+      "id": "t2",
+      "player": {
+        "external_id": 2002, "slug": "florian-wirtz", "name_ko": "플로리안 비르츠", "name": "Florian Wirtz", "photo_url": null,
+        "team": { "external_id": 40, "slug": "liverpool", "name_ko": "리버풀", "name": "Liverpool", "logo_url": null },
+        "league": { "external_id": 39, "slug": "premier-league", "name_ko": "프리미어리그", "name": "Premier League" }
+      },
+      "from_team": { "external_id": 168, "slug": "leverkusen", "name_ko": "레버쿠젠", "short_name_ko": "레버쿠젠", "name": "Bayer Leverkusen", "logo_url": null },
+      "to_team":   { "external_id": 40, "slug": "liverpool", "name_ko": "리버풀", "short_name_ko": "리버풀", "name": "Liverpool", "logo_url": null },
+      "transfer_date": "2026-05-08",
+      "fee": "€120m"
+    },
+    {
+      "id": "t3",
+      "player": {
+        "external_id": 2003, "slug": "victor-osimhen", "name_ko": "빅터 오시멘", "name": "Victor Osimhen", "photo_url": null,
+        "team": { "external_id": 49, "slug": "chelsea", "name_ko": "첼시", "name": "Chelsea", "logo_url": null },
+        "league": { "external_id": 39, "slug": "premier-league", "name_ko": "프리미어리그", "name": "Premier League" }
+      },
+      "from_team": { "external_id": 492, "slug": "napoli", "name_ko": "나폴리", "short_name_ko": "나폴리", "name": "Napoli", "logo_url": null },
+      "to_team":   { "external_id": 49, "slug": "chelsea", "name_ko": "첼시", "short_name_ko": "첼시", "name": "Chelsea", "logo_url": null },
+      "transfer_date": "2026-05-05",
+      "fee": "€85m"
+    },
+    {
+      "id": "t4",
+      "player": {
+        "external_id": 2004, "slug": "rasmus-hojlund", "name_ko": "라스무스 호일룬", "name": "Rasmus Højlund", "photo_url": null,
+        "team": { "external_id": 33, "slug": "manchester-united", "name_ko": "맨체스터 유나이티드", "name": "Manchester United", "logo_url": null },
+        "league": { "external_id": 39, "slug": "premier-league", "name_ko": "프리미어리그", "name": "Premier League" }
+      },
+      "from_team": { "external_id": 487, "slug": "atalanta", "name_ko": "아탈란타", "short_name_ko": "아탈란타", "name": "Atalanta", "logo_url": null },
+      "to_team":   { "external_id": 33, "slug": "manchester-united", "name_ko": "맨유", "short_name_ko": "맨유", "name": "Manchester United", "logo_url": null },
+      "transfer_date": "2026-05-02",
+      "fee": "€72m"
+    },
+    {
+      "id": "t5",
+      "player": {
+        "external_id": 2005, "slug": "alphonso-davies", "name_ko": "알폰소 데이비스", "name": "Alphonso Davies", "photo_url": null,
+        "team": { "external_id": 541, "slug": "real-madrid", "name_ko": "레알 마드리드", "name": "Real Madrid", "logo_url": null },
+        "league": { "external_id": 2, "slug": "champions-league", "name_ko": "챔피언스리그", "name": "UEFA Champions League" }
+      },
+      "from_team": { "external_id": 157, "slug": "bayern-munich", "name_ko": "바이에른 뮌헨", "short_name_ko": "바이에른", "name": "Bayern Munich", "logo_url": null },
+      "to_team":   { "external_id": 541, "slug": "real-madrid", "name_ko": "레알 마드리드", "short_name_ko": "레알", "name": "Real Madrid", "logo_url": null },
+      "transfer_date": "2026-04-28",
+      "fee": null
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "items": [
+    {
+      "external_id": 9001,
+      "league": { "external_id": 39, "slug": "premier-league", "name_ko": "프리미어리그", "short_name_ko": "EPL", "name": "Premier League" },
+      "home": { "external_id": 40, "slug": "liverpool", "name_ko": "리버풀", "short_name_ko": "리버풀", "name": "Liverpool", "logo_url": null },
+      "away": { "external_id": 49, "slug": "chelsea", "name_ko": "첼시", "short_name_ko": "첼시", "name": "Chelsea", "logo_url": null },
+      "kickoff_at": "2026-05-14T10:00:00Z",
+      "status_short": "NS",
+      "goals_home": null,
+      "goals_away": null,
+      "_period": "day"
+    },
+    {
+      "external_id": 9002,
+      "league": { "external_id": 39, "slug": "premier-league", "name_ko": "프리미어리그", "short_name_ko": "EPL", "name": "Premier League" },
+      "home": { "external_id": 50, "slug": "manchester-city", "name_ko": "맨체스터 시티", "short_name_ko": "맨시티", "name": "Manchester City", "logo_url": null },
+      "away": { "external_id": 33, "slug": "manchester-united", "name_ko": "맨체스터 유나이티드", "short_name_ko": "맨유", "name": "Manchester United", "logo_url": null },
+      "kickoff_at": "2026-05-14T12:30:00Z",
+      "status_short": "NS",
+      "goals_home": null,
+      "goals_away": null,
+      "_period": "day"
+    },
+    {
+      "external_id": 9003,
+      "league": { "external_id": 2, "slug": "champions-league", "name_ko": "챔피언스리그", "short_name_ko": "UCL", "name": "UEFA Champions League" },
+      "home": { "external_id": 541, "slug": "real-madrid", "name_ko": "레알 마드리드", "short_name_ko": "레알", "name": "Real Madrid", "logo_url": null },
+      "away": { "external_id": 50, "slug": "manchester-city", "name_ko": "맨체스터 시티", "short_name_ko": "맨시티", "name": "Manchester City", "logo_url": null },
+      "kickoff_at": "2026-05-14T19:00:00Z",
+      "status_short": "NS",
+      "goals_home": null,
+      "goals_away": null,
+      "_period": "day"
+    },
+    {
+      "external_id": 9004,
+      "league": { "external_id": 39, "slug": "premier-league", "name_ko": "프리미어리그", "short_name_ko": "EPL", "name": "Premier League" },
+      "home": { "external_id": 42, "slug": "arsenal", "name_ko": "아스날", "short_name_ko": "아스날", "name": "Arsenal", "logo_url": null },
+      "away": { "external_id": 47, "slug": "tottenham", "name_ko": "토트넘", "short_name_ko": "토트넘", "name": "Tottenham", "logo_url": null },
+      "kickoff_at": "2026-05-12T14:00:00Z",
+      "status_short": "FT",
+      "goals_home": 3,
+      "goals_away": 1,
+      "_period": "week"
+    },
+    {
+      "external_id": 9005,
+      "league": { "external_id": 3, "slug": "europa-league", "name_ko": "유로파리그", "short_name_ko": "UEL", "name": "UEFA Europa League" },
+      "home": { "external_id": 33, "slug": "manchester-united", "name_ko": "맨체스터 유나이티드", "short_name_ko": "맨유", "name": "Manchester United", "logo_url": null },
+      "away": { "external_id": 492, "slug": "napoli", "name_ko": "나폴리", "short_name_ko": "나폴리", "name": "Napoli", "logo_url": null },
+      "kickoff_at": "2026-05-11T19:00:00Z",
+      "status_short": "AET",
+      "goals_home": 2,
+      "goals_away": 2,
+      "_period": "week"
+    },
+    {
+      "external_id": 9006,
+      "league": { "external_id": 48, "slug": "carabao-cup", "name_ko": "카라바오컵", "short_name_ko": "카라바오", "name": "Carabao Cup" },
+      "home": { "external_id": 49, "slug": "chelsea", "name_ko": "첼시", "short_name_ko": "첼시", "name": "Chelsea", "logo_url": null },
+      "away": { "external_id": 47, "slug": "tottenham", "name_ko": "토트넘", "short_name_ko": "토트넘", "name": "Tottenham", "logo_url": null },
+      "kickoff_at": "2026-05-20T19:00:00Z",
+      "status_short": "PST",
+      "goals_home": null,
+      "goals_away": null,
+      "_period": "month"
+    },
+    {
+      "external_id": 9007,
+      "league": { "external_id": 45, "slug": "fa-cup", "name_ko": "FA컵", "short_name_ko": "FA", "name": "FA Cup" },
+      "home": { "external_id": 50, "slug": "manchester-city", "name_ko": "맨체스터 시티", "short_name_ko": "맨시티", "name": "Manchester City", "logo_url": null },
+      "away": { "external_id": 40, "slug": "liverpool", "name_ko": "리버풀", "short_name_ko": "리버풀", "name": "Liverpool", "logo_url": null },
+      "kickoff_at": "2026-05-25T14:00:00Z",
+      "status_short": "NS",
+      "goals_home": null,
+      "goals_away": null,
+      "_period": "month"
+    }
+  ]
+}
