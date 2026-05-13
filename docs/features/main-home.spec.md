@@ -295,3 +295,13 @@ shape 상세는 devplan §6 참조.
 - 인증 상태별 메인 분기 (USER 만 노출되는 컴포넌트 등) — MVP 외 (메인 §12)
 - WC 2026 league 등장 시 메인 노출 정책 — 별 feature
 - 큐브 회전 transition easing 값 미세조정 — fe-dev 시각 확인 후 결정
+
+## 13. 적용 — League 동적 테마 (ui-standards §3.2)
+
+ui-standards §3.2 의 "메인 페이지 경기 카드 — 카드 좌측 보더 또는 배지 = 각 경기의 league 색" 규칙을 본 feature 도 따른다:
+
+- 중앙 fixture 카드: 각 `FixtureCard` 의 root 에 `:data-league="fx.league.slug"` binding → `border-left: 4px solid var(--theme-primary)` (fixture-detail feature 가 도입하는 `themes.css` 재사용)
+- 리그 필터 활성 탭: 활성 리그의 `var(--theme-primary)` 배경 (활성 탭 영역 자체에 `data-league` binding)
+- 우측 standings/top players 블록: 선택 리그 슬러그를 블록 root 에 binding → 헤더 / select chip 색상 swap
+
+이 모든 element 는 `--theme-*` 변수만 참조 (직접 `--league-*` 참조 금지). themes.css 미존재 시 (fixture-detail 미머지 상태) 는 main-home 작업자가 stub 생성 후 fixture-detail 머지 시 통합.
