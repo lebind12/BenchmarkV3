@@ -1,0 +1,41 @@
+{
+  "endpoint_id": "phase-5-translation-filler",
+  "endpoint": {
+    "method": "N/A",
+    "path": "N/A (background worker)",
+    "fe_mockup_ref": null
+  },
+  "state": "IMPL_PUSHED",
+  "owner": "be-test",
+  "iteration": {
+    "test_loop": 0,
+    "review_loop": 0
+  },
+  "artifacts": {
+    "spec_path": "docs/spec/endpoints/phase-5-translation-filler.md",
+    "test_plan_path": "docs/spec/endpoints/phase-5-translation-filler.testplan.md",
+    "test_code_path": "tests/unit/test_translation_filler.py",
+    "integration_test_code_path": "tests/integration/test_translation_filler.py",
+    "impl_branch": "w1-translation-filler",
+    "impl_commit": "aee9e7a",
+    "migrations": []
+  },
+  "evidence": {
+    "unit_test_log": ".claude/state/endpoint-flow/phase-5-translation-filler/unit.log",
+    "integration_test_log": ".claude/state/endpoint-flow/phase-5-translation-filler/integration.log",
+    "test_verdict": "ALL_PASS",
+    "coverage_pct": null,
+    "notes": "Unit 14/14 PASS (TF-U-01..09). Integration 7/7 PASS (TF-I-01..07) against TEST_DATABASE_URL Supabase, mock OpenAI. Regression: phase-1 unit 74/74 + phase-1 integration 28/28 PASS. Total 123/123."
+  },
+  "gates": {
+    "spec_approved_by": "be-reviewer",
+    "test_passed_at": "2026-05-13T22:55:00+09:00",
+    "review_approved_by": null,
+    "merge_approved_by": null
+  },
+  "blockers": [],
+  "next_action": {
+    "agent": "be-reviewer",
+    "command": "review impl_commit aee9e7a against docs/workers/translation-filler.md + phase-5 spec"
+  }
+}
